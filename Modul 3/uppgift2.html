@@ -1,0 +1,156 @@
+<!-- Andreas Bom -->
+
+<!-- 2. Gör om uppgift 9 och 10 från modul 2 som handlar om läraren Morgan. Programmet ska ha samma funktionalitet men istället för att lagra namn och betyg som två arrayer ska du använda en array av lämpliga objekt istället.
+
+<!-- 9. Morgan, som är högstadielärare, behöver ett register för att hålla ordning på sina elevers betyg. Antag att du har två arrayer, en med namn och en med betyg. Exempelvis: namn = ["Klara", "Andrea", "Emil", "Sarah", "Alicia", "Victor", "Thomas", "Robert"] med betygen: betyg = ["A", "B", "C", "A", "D", "C", "E", "E"]. Gör därefter en funktion (getGrade) som söker efter ett namn och returnerar betyget (första matchande namnet räcker). Gör därefter en sida som testar och demonstrerar din nya funktion (automatiskt när sidan laddas eller via en knapptryckning). Arrayerna namn och betyg kan vara globala variabler eller, lite snyggare, lokala variabler som skickas som indata till funktionerna.
+
+<!-- 10. Bygg ut uppgiften innan med en funktion (getNames) som returnerar alla namn (i form av en array) som har ett visst betyg -->
+
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 2</title>
+
+        <script>
+
+/************ Data ******************************************************/
+            var gradeData = [
+                {
+                    name: "Klara",
+                    grade: "A"
+                },
+                {
+                    name: "Andrea",
+                    grade: "B"
+                },
+                {
+                    name: "Emil",
+                    grade: "C"
+                },
+                {
+                    name: "Sarah",
+                    grade: "A"
+                },
+                {
+                    name: "Alicia",
+                    grade: "D"
+                },
+                {
+                    name: "Viktor",
+                    grade: "C"
+                },
+                {
+                    name: "Thomas",
+                    grade: "E"
+                },
+                {
+                    name: "Robert",
+                    grade: "E"
+                }
+            ];
+/**********************************************************************************************/
+
+/********************   Funktioner  ********************************************/
+
+
+            //Funktion getGrade
+                //Söker efter namn och returnerar betyget om namnet hittas i nameArray
+            function getGrade(nameIn, gradeData) {
+
+                var name = firstToUpper(nameIn); //Försäkrar att första bokstaven i namnet är stor bokstav
+                var grade;
+
+                //Letar efter det önskade namnet i gradeData och sätter dess betyg till variabeln grade
+                for(var i = 0; i < gradeData.length; i++) {
+                    if(gradeData[i].name === name){
+                        grade = gradeData[i].grade;
+                    }
+                }
+
+                if (grade) {
+                    return grade;
+                }else {
+                    return "Ingen med det namnet är registrerad";
+                }
+            }
+
+
+            //Function getNames()
+                //Söker efter namn som har ett specificerat betyg
+            function getNames(gradeIn, gradeData) {
+                var gradeIn = gradeIn.toUpperCase();//försäkrar om att betyget är i versaler
+                var namesArray = [];//Array som samlar alla namnen med det sökta betyget
+
+                //Letar igenom efter betyget och om det hittas läggs dess namn till namesArray
+                for (var i = 0; i < gradeData.length; i++) {
+                    if (gradeData[i].grade == gradeIn) {
+
+                        namesArray.push(gradeData[i].name);
+                    }
+                }
+
+                //Om betyget finns, returneras namnen som en array, annars visas information om att betyget ej finns
+                if (namesArray[0] != undefined) {
+                    return namesArray;
+                }else {
+                    return "Ingen med det betyget finns registrerad.";
+                }
+            }
+
+
+            //Funktion firstToUpper
+                //Function för att göra första bokstaven i namnet till stor bokstav.
+            function firstToUpper(string){
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+
+
+/*************************** Interface till HTML-documentet *************************************/
+
+        //Funktion showGrade
+            //Hämtar namn från användaren och skriver ut betyget i dokumentet
+        function showGrade () {
+            //Användarinput
+            var nameInput = document.getElementById("inputName").value;
+            //Ut till dokumentet, funktionen getGrade används för att hämta betyget på valt namn
+            document.getElementById("result").innerHTML = getGrade(nameInput, gradeData);
+        }
+
+
+        //Funktion showNames
+            //Hämtar betyg från användaren och skriver ut namnet i dokumentet
+        function showNames() {
+            //AnvändarInput
+            var gradeInput = document.getElementById("inputGrade").value;
+            var namesWithGrade = []; //Array som sammlar alla namn som returneras av getNames-funktionen
+            var str = ""; //Sträng som byggs av samtliga namn i namesWithGrade[]
+
+            namesWithGrade = getNames(gradeInput, gradeData);
+
+            //Bygger en sträng av namnen i namesWithGrade[]
+            namesWithGrade.forEach(function(name){
+
+                str += name + " ";
+            });
+
+            //Skriver ut namnen i arrayn till dokumentet
+            document.getElementById("result").innerHTML = str;
+
+        }
+
+
+
+        </script>
+    </head>
+    <body>
+        <input type="text" size="10" id="inputName" value="Skriv in namn" onclick="this.value='';">
+        <input type="button" id="btnShowGrade" value="Hämta betyg" onclick="showGrade();"/>
+        <input type="text" size="8" id="inputGrade" value="Skriv in betyg" onclick="this.value='';"/>
+        <input type="button"  id="btnShowNames" value="Visa Alla Namn" onclick="showNames();"/>
+        <h3>Sökresultat</h3>
+        <p id="result"></p>
+    </body>
+</html>

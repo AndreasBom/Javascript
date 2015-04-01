@@ -1,0 +1,38 @@
+<!-- Andreas Bom -->
+
+<!--5. Skapa en array med orden "God", "och", "JUL", "Gott", "år", "Nytt" (i den ordningen). När användaren trycker på en knapp skall texten "God Jul och Gott Nytt år" skrivas ut med hjälp av arrayen. -->
+
+
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 5</title>
+
+        <script>
+
+            //Skapar två arrayer
+            var myArray = ['God','och','JUL','Gott','år','Nytt'];
+            var keyArray = [0,2,1,3,5,4]; //Nyckel för att orden ska hamna i rätt ordning
+
+            function godJul() {
+                var p = document.createElement("P"); //Skapar en <p>-tagg
+                p.id = "result"; //Tilldelar p-taggen ett id
+                document.body.appendChild(p);  //lägger p-taggen som child till <body>
+
+                //loopar igenom myArray
+                for(var i = 0; i < myArray.length; i++) {
+
+                    var step = keyArray[i]; //step tilldelas nyckeltal fråm keyArray
+                    document.getElementById("result").innerHTML += myArray[step] + " "; // skriver ut orden i rätt ordnin, baserat på värderna i variabeln step
+                }
+            }
+
+        </script>
+
+    </head>
+    <body>
+        <button onclick="godJul();">God Jul</button>
+    </body>
+</html>

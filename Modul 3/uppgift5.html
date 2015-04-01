@@ -1,0 +1,35 @@
+<!-- Andreas Bom -->
+
+<!-- 5. Gör ett eget namespace och lägg till funktionen addera. Funktionen addera skall ta två tal som inparameter och skriva ut summan av dessa på lämpligt ställe (t.ex. genom att ändra innerHTML i ett element). -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 5</title>
+
+        <script>
+            //Namespace
+            var myApp = {};
+
+            //Funktion addNum
+                //Två nummer in, summan ut
+            myApp.addNum = function(arg1, arg2) {
+                var sum = parseFloat(arg1) + parseFloat(arg2);
+                document.getElementById("result").innerHTML = sum;
+            };
+
+
+        </script>
+    </head>
+    <body>
+        <h1>Addera två tal</h1>
+
+        <form action="">
+            <input type="text" id="num1"/>
+            <input type="text" id="num2"/>
+            <input type="button" value="Addera" onclick="myApp.addNum(num1.value, num2.value);"/>
+        </form>
+        <p id="result"></p>
+    </body>
+</html>

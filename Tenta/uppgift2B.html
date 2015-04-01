@@ -1,0 +1,39 @@
+<!-- Andreas Bom
+
+b) Två-dimensionell array (1p)
+
+Gör om uppgiften i a) men utgå nu istället från en två-dimensionell array enligt:
+
+   var inventarielista = [["Hamster", 3], ["Kanin", 1], ["Undulat", 9], [["Hund", 5]]; -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 2B</title>
+    </head>
+    <body>
+        <p id="result"></p>
+        <script>
+            var inventarielista = [["Hamster", 3], ["Kanin", 1], ["Undulat", 9], ["Hund", 5]];
+
+            //Variabler
+            var output = "";
+            var antalDjur = 0;
+
+            //Loop som kör igenom invetarielista
+            for(var i = 0; i < inventarielista.length; i++){
+                antalDjur = inventarielista[i][1];
+                for(var j = 0; j < antalDjur; j++ ){
+                    output += inventarielista[i][0] + "<br />";
+                }
+            }
+
+            //Skriver till webbdokumentet
+            document.getElementById("result").innerHTML = output;
+
+
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!-- Andreas Bom -->
+
+<!-- 6. Skapa en array med orden "Hej", "Nej", "EJ", "Leverpastej", "42". Via ett formulär ska användaren kunna skriva en siffra och ni skall då visa positionens ord i arrayen. Till exempel: anger användaren 2 skall ordet "EJ" visas. -->
+
+
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 6</title>
+
+        <script>
+
+            //Skapar en Array
+            var myArray = ['Hej','Nej','Ej','Leverpastej', '42'];
+
+            //Funktion som körs när knappen trycks.
+            function showArrayItem() {
+                //input
+                var inputUser = document.getElementById("in").value;
+
+                //output
+                document.getElementById("resultat").innerHTML = myArray[inputUser];
+            }
+
+
+
+
+
+
+
+
+
+        </script>
+    </head>
+    <body>
+        <p>Välj ett tal mellan 0-4</p>
+        <input type="text" id="in"  size="6" value="Skriv ett tal" onfocus="this.value='';" />
+        <button type="button" onclick="showArrayItem();">Ok</button>
+        <p id="resultat"></p>
+
+
+    </body>
+</html>

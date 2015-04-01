@@ -1,0 +1,30 @@
+Andreas Bom
+1a) Förklara koden nedan med ord. Vad gör if-satserna? (1p)
+
+function logik(x, y) {
+
+   var s = 0;
+
+   if (x == 1 && y == 2) {
+
+      s = 1;
+
+   } else if (y == 3) {
+
+      s = 2;
+
+   if (x == 2) {
+
+      s = 3;
+
+   }
+
+   console.log(s);
+
+}
+
+SVAR:
+Beroende på var den saknade måsvingen placeras, kommer koden uppföra sig olika. Jag sätter måsvingen efter else if-satsen (och innan sista if-satsen) och ger mitt svar därefter.
+Första if-satsen kontrollerar om x är lika med 1 OCH y är lika med 2. Om båda förhållanderna är sanna, tilldelas variabeln s värdet 1. 
+Andra (else-) if-satsen körs endast om argumenten i första satsen är falska. Är y lika med 3 tilldelas variabeln s värdet 2.
+Tredje if-satsen kommer köras oberoende av de två föregående if-satserna. Om x är 2 tilldelas s värdet 3. 

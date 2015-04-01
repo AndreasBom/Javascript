@@ -1,0 +1,89 @@
+<!-- Gör ett program som slumpar fram ett tal (1-9) användaren får sedan 3 försök att gissa på rätt tal. Efter 3 gissningar skall texten "tyvärr du misslyckades" komma upp och om användaren gissar rätt skall texten "Grattis" komma upp. -->
+
+
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 18</title>
+        <style>
+            
+            div {
+                margin: 40px auto;
+                width: 20%;
+            }
+            input {
+                display: block;
+            }
+        </style>
+        
+        <script>
+            
+            //console.log används på flera ställen för att kunna kontrollera att villkor och loop utförs korrekt
+            
+            //Variabler som behåller sitt värde, även när onClick aktivieras
+            var numOfGuesses = 0;
+            var rnd;
+            
+            
+            
+            function guess() {
+                console.log("START function")
+                console.log("number of guesses ");
+                
+                //variabler
+                var inputGuess, fel, gameOver, success, rounds;
+                
+                //Returnerar antalet försök kvar 
+                fel = "fel svar, försök igen. Du har " + ((numOfGuesses - 2) * -1) + " försök kvar.";
+                //Returneras efter 3 fösök
+                gameOver = "Game Over, tyvärr du misslyckades";
+                //Returneras vid rätt svar
+                success = "Grattis! Du gissade rätt.";
+                //Antal försök
+                lifes = 3;
+                
+                //Randomisera tal mellan 1-9, om det är första omgången som spelet körs
+                if (numOfGuesses === 0) {
+                    rnd = Math.floor((Math.random() *(9-1) + 1) + 1);
+                }
+                
+                console.log("Slumptal = " + rnd);
+
+                //Öka antal gissningar
+                numOfGuesses += 1;
+
+                //Användarinput omvandlas till heltal
+                inputGuess = parseInt(document.getElementById("inputText").value);
+
+                //Test av användarinput gentemot slumptal
+                if (inputGuess === rnd) {
+                    console.log("SUCCESS");
+                    document.getElementById("result").innerHTML = success;
+                    numOfGuesses = 0; //Spelet nollställs
+                } else if (inputGuess !== rnd && numOfGuesses < lifes){
+                    console.log("FEL")
+                    document.getElementById("result").innerHTML = fel;
+                } else {
+                    console.log("GAMEOVER");
+                    document.getElementById("result").innerHTML = gameOver;
+                    numOfGuesses = 0;
+
+                }
+                console.log("END function");
+            }
+        
+        </script>
+        
+    </head>
+    <body>
+        
+        <div>
+            <h2>Gissa ett tal</h2>
+            <input type="text" id="inputText" />
+            <input type="button" id="btn" value="Gissa" onClick="guess();" />
+             <p id="result"></p>
+            
+        </div>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<!-- Andreas Bom -->
+
+<!-- 9. Skapa ett program där ett div-element rör sig fram och tillbaka i x-led på skärmen automatiskt. Använd setInterval eller setTimeout (och använd namespace). -->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Uppgift 9</title>
+
+    <script>
+        //Namespace
+        var M9 = {};
+
+        //Bredd på webbläsaren
+        M9.browserW = window.innerWidth;
+        //Flytta åt höger eller vänster
+        M9.moveRight = true;
+
+        //Funktion moveElem()
+            //Inparametrar = id på element och elementets bredd
+        M9.moveElem = function(element, elementWidth) {
+            //Variabel för att hålla style.left-värdet
+            var element = document.getElementById(element).style.left;
+            element = parseInt(element);
+
+
+            if(this.moveRight == true){
+                element += 1;//Öka style.left med 1
+                if(element == (this.browserW-elementWidth)) {//När bredden på browsern-bredden på elementet är uppnåt ska elementet byta färdriktning
+                    this.moveRight = false;
+                }
+                //Tilldela style.left det nya värdet
+                document.getElementById("divElm").style.left = element + "px";
+            }
+
+            if (this.moveRight == false){
+                element -= 1;//Minskar style.left med 1
+                if(element == 0 ) {//När elementet är längst åt höger ska det byta färdriktning
+                    this.moveRight = true;
+                }
+                document.getElementById("divElm").style.left = element + "px";
+            }
+        };
+
+
+
+    </script>
+</head>
+<body>
+    <div id="divElm" style="background-color: cadetblue; width: 200px; height: 200px; position: absolute; left: 0px; top: 100px;"></div>
+
+    <script>
+
+        setInterval(function() {
+            M9.moveElem("divElm", 200)
+        }, 10);
+    </script>
+</body>
+</html>

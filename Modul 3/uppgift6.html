@@ -1,0 +1,32 @@
+<!-- Andreas Bom -->
+
+<!-- 6. Gör ett eget namespace och lägg till en variabel som heter antalClick. Skapa en funktion som heter click och varje gång funktionen körs skall 1 läggas till variabeln antalClick. Total antal klick skall skrivas ut på skärmen på valfritt ställe. Funktionen skall "triggas" när man trycker på en knapp. -->
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Uppgift 6</title>
+
+    <script>
+        //NameSpace
+        var modul = {};
+
+        //Variabel
+        modul.antalClick = 0;
+
+        //Funktion som returnerar antal knapptryckningar
+        modul.click = function() {
+            this.antalClick += 1;
+            return this.antalClick;
+        }
+
+    </script>
+</head>
+<body>
+    <!-- Funktionen körs vid knapptryckning och resultatet visas i #result -->
+    <button id="btn" onclick="result.innerHTML = modul.click();">Klicka</button>
+    <p id="result"></p>
+</body>
+</html>

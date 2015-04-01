@@ -1,0 +1,60 @@
+<!-- Andreas Bom -->
+
+
+            <!-- Gör ett program med tre variabler som heter x, y och z. använd if, else if och else för att göra följande utskrifter:
+            om x är större än y och x är större än z skriv ut "x är det högsta talet"
+            om y är större än x och y är större än z skriv ut "y är det högsta talet"
+            om z är större än x och z är större än y skriv ut "z är det högsta talet"
+            om inget av detta är sant skriv ut "det högsta talet finns lagrat i fler än en variabel" */ -->
+
+
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 7</title>
+        <script>
+            
+            //Variabler
+            var x;
+            var y;
+            var z;
+            
+            //Funktion som möjliggör att spelet kan spelas flera gånger
+            var play = function() {
+                //Input från användaren sparas i variabler, och typekonverteras till flyttal. 
+                x = parseFloat(prompt("Sätt värdet på x"));
+                y = parseFloat(prompt("Sätt värdet på y"));
+                z = parseFloat(prompt("Sätt värdet på z"));
+
+                //Testar vilket tal som är störst. Utput till användaren, samt att knappens text ändras
+                if (x > y && x > z) {
+                    document.getElementById("result").innerHTML ="x är det högsta talet";
+                    document.getElementById("playBtn").value = "Spela igen";
+                }
+                else if (y > x && y > z) {
+                    document.getElementById("result").innerHTML = "y är det högsta talet";
+                    document.getElementById("playBtn").value = "Spela igen";
+                }
+                else if (z > x && z > y) {
+                    document.getElementById("result").innerHTML = "z är det högsta talet";
+                    document.getElementById("playBtn").value = "Spela igen";
+                }
+                else {
+                    document.getElementById("result") = "det högsta talet finns lagrat i fler än en variabel";
+                    document.getElementById("playBtn").value = "Spela igen";
+                }
+
+                
+            }
+            
+           
+        </script>
+    </head>
+    <body>
+        <p id="result"></p>
+        <input type="button" id="playBtn" onClick="play();" value="Spela">
+        
+       
+    </body>
+</html>

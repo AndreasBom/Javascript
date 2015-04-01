@@ -1,0 +1,30 @@
+<!-- Andreas Bom -->
+
+<!-- 7. Skriv ett program som men hjälp av javascript ändrar bakgrundsfärgen på ett div-element när man håller musen över den, och sedan ändrar tillbaka till ursprungsfärgen när man flyttar bort muspekaren (använd namespace). -->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Uppgft 7</title>
+    <script>
+
+        //NameSpace
+        var bg = {};
+
+        //Funktion mouseOver()
+        bg.mouseOver = function(id) {
+            id.style.backgroundColor = "black"; //Ändrar stilegenskaper
+        };
+
+        //Funktion mouseOut()
+        bg.mouseOut = function(id) {
+            id.style.background = "chartreuse"; //Ändrar stilegenskaper
+        };
+
+    </script>
+</head>
+<body>
+    <div style="background-color: chartreuse; width: 200px; height: 200px;" onmouseover="bg.mouseOver(this)" onmouseout="bg.mouseOut(this)"></div>
+</body>
+</html>

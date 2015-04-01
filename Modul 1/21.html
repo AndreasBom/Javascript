@@ -1,0 +1,73 @@
+<!-- Man vill ha ett program som omvandlar en temperatur i Celsius till Fahrenheit enligt formeln: tempF = 1.8 * tempC + 32. Utforma dialogen med användaren på ditt eget sätt. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 21</title>
+        <style>
+            
+            
+            label {
+                display: block;
+            }
+            
+            #tempInput {
+                width: 75px;
+            }
+            
+            p, form {
+                display: inline;
+            }
+            
+        </style>
+        
+        <script>
+            
+            function getTemp(){
+                
+                //Variabler
+                var temp = document.getElementById("tempInput").value;
+                var scale = document.getElementById("scale").value;
+                var result;
+                
+                //Villkor baserat på drop-downlist (<option>)
+                if (scale == "Celsius") {
+                    
+                    result = 1.8 * temp + 32;
+                    
+                    //Output
+                    document.getElementById("result").innerHTML = Math.round(result);
+                    document.getElementById("enhet").innerHTML = " grader Fahrenheit";
+                    
+                } else if (scale == "Fahrenheit") {
+                    
+                    result = (temp - 32) * 5 / 9;
+                    
+                    //Output
+                    document.getElementById("result").innerHTML = Math.round(result);
+                    document.getElementById("enhet").innerHTML = " grader Celsius";
+                }
+                
+            }
+            
+        </script>
+        
+    </head>
+    <body>
+        
+        <h1>TempOmvandlaren</h1>
+        
+        <form>
+            <label for="tempInput">Temperatur</label>
+            <input type="text" id="tempInput" />
+            <select name="scale" id="scale" onChange="getTemp();" />
+                <option value="label">Välj Enhet..</option>
+                <option value="Fahrenheit">Fahrenheit</option>
+                <option value="Celsius">Celsius</option>
+            </select>
+        </form>
+        <p> är <span id="result"></span><span id="enhet"></span></p>
+    </body>
+</html>

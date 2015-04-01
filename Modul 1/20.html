@@ -1,0 +1,33 @@
+<!-- gör ett formulär där användaren matar in hur många gånger han vill få fram texten "im the best" (använd alertruta eller console.log()) och trigga genom att trycka på en knapp. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 20</title>
+        
+        <script>
+            
+            //Indata från textbox, utdata till console.log
+            function funcRep() {
+                var count = document.getElementById("count").value;
+                
+                for (var i = 0; i < count; i++) {
+                    console.log("im the best");
+                }
+            }
+            
+        </script>
+        
+        
+    </head>
+    <body>
+
+       <form>
+           <label for="count">Hur många gånger ska det repeteras?</label>
+           <input type="text" id="count" />
+           <input type="button" id="btn" value="Kör" onClick="funcRep();" />
+       </form>
+    </body>
+</html>

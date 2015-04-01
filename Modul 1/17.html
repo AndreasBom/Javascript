@@ -1,0 +1,44 @@
+<!-- Gör ett program där användaren får mata in sin ålder. Om användaren är 15 år eller yngre skriv ut texten "du får hålla dig till cyckel", Om användaren är 15-17 "du får köra moped" och om användaren är  18 år äller äldre "du kan ta bilen". -->
+
+
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 17</title>
+    
+        <script>
+            
+            function ageTest() {
+                
+                //variabler
+                var age;
+            
+                //input från textbox
+                age = parseInt(document.getElementById("ageText").value);
+
+                //Output till <p> med id result
+                if (age < 15) {
+                    document.getElementById("result").innerHTML = "du får hålla dig till cyckel";
+                }else if (age >= 15 && age <= 17) {
+                    document.getElementById("result").innerHTML = "du får köra moped";
+                }else {
+                    document.getElementById("result").innerHTML = "du kan ta bilen";
+                }
+            }
+            
+        
+        </script>
+    </head>
+    <body>
+
+        <div>
+            <h2>Ålderstestet</h2>
+            
+            <label for="age">Ålder</label>
+            <input type="text" id="ageText" />
+            <input type="button" id="btn" value="Ok" onClick="ageTest();" />
+            <p id="result"></p>
+        </div>
+    </body>
+</html>

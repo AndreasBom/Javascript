@@ -1,0 +1,33 @@
+<!-- Andreas Bom -->
+
+<!--  4. Studera koden nedan och förklara vad som skrivs ut. Tänk först - provkör sedan! Vad skrivs ut?-->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script>
+        var personA = {firstName:"Thomas", lastName:"Lundqvist", age:47, favorite:"apple"}
+        var personB = personA;
+
+        personB.favorite = "pear";
+
+        printit(personA);
+        printit(personB);
+
+        personA = {firstName:"Robert", lastName:"Andersson Dahlberg", age:23, favorite:"banana"}
+
+        printit(personA);
+        printit(personB);
+
+        function printit(person) {
+            console.log(person.firstName + " likes " + person.favorite);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

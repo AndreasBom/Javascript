@@ -1,0 +1,126 @@
+<!-- Andreas Bom -->
+
+<!--På ett torg säljs potatis och andra grönsaker som har olika pris/kg  gör ett program som kan räkna ut pris då vi matar in vikten samt kilopriset. gör också ett till fält där kan mata in hur mycket kunden betalat det skall seden skrivas ut hur mycket kunden skall få tillbaka i växel. (de fetmarkerade fälten skall skrivas in av användaren de andra skall beräknas fram)--> 
+
+
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 16</title>
+        
+        <!- Styles -->
+        <style>
+            input[type="text"] {
+                width: 60px;
+            }
+            #calcPriceText, #changeText {
+                border: none;
+            }
+            div {
+                width: 400px;
+                border: 1px solid gray;
+                margin: 30px auto;
+                padding: 30px;
+            }
+            table {
+                margin: auto;
+            }
+            h2 {
+                text-align: center;
+            }
+            
+            
+        </style>
+        
+        
+        <!-- Funktioner -->
+        <script>
+            //Jag använder två funktioner, en för att beräkna pris och en för att beräkna växel.
+            
+            //Funktion för att beräkna pris
+            function calcPrice() {
+                
+                //Variabler
+                var kilopris, vikt, totalPris;
+                
+                //input från textbox
+                kilopris = parseFloat(document.getElementById("kiloPris").value);
+                vikt = parseFloat(document.getElementById("vikt").value);
+                
+                //Output till textbox
+                totalPris = kilopris * vikt;
+                document.getElementById("calcPriceText").value = totalPris;
+                
+            }
+            
+            
+            //Funktion för att beräkna växel.
+            function calcChange() {
+                
+                //Variabler
+                var pris, paid, change;
+                
+                //input från textbox
+                pris = parseFloat(document.getElementById("calcPriceText").value);
+                paid = parseFloat(document.getElementById("paidText").value);
+                
+                
+                //Output till textbox
+                change = paid - pris;
+                document.getElementById("changeText").value = change;
+                
+            }
+            
+        </script>
+        
+    </head>
+    <body>
+        
+        <div>
+            <h2>Pris- och växelApp</h2>
+            <form name="prisApp">
+                <table>
+                    <tr> <!-- input kilopris-->
+                        <td><label for="kiloPris">Pris/kg</label></td>
+                        <td><input type="text" id="kiloPris" /></td>
+                    </tr>
+                    <tr> <!-- input vikt-->
+                        <td><label for="vikt">Vikt/kg</label ></td>
+                        <td><input type="text" id="vikt" /></td>
+                    </tr>
+                    <tr> <!-- knapp totalt-->
+                        <td><label for="calcPriceBtn">Beräkna pris</label></td>
+                        <td><input type="button" id="calcPriceBtn" value="Beräkna" onClick="calcPrice();" /></td>
+                    </tr>
+                    <tr> <!-- output pris totalt-->
+                        <td><label for="calcPriceText">Beräknat pris</label></td>
+                        <td><input type="text" id="calcPriceText"  /></td>
+                    </tr>
+                    <tr> <!-- input betalat-->
+                        <td><label for="paidText">Betalat</label></td>
+                        <td><input type="text" id="paidText" /></td>
+                    </tr>
+                    <tr> <!-- knapp växel -->
+                        <td><label for="calcChangeBtn">Beräkna växel</label></td>
+                        <td><input type="button" id="calcChangeBtn" value="Beräkna" onClick="calcChange();" /></td>
+                    </tr>
+                    <tr> <!-- output växel tillbaka-->
+                        <td><label for="changeText">Att få tillbaka</label></td>
+                        <td><input type="text" id="changeText" /></td>
+                    </tr>
+                </table>
+                
+            </form>
+            
+                 
+                
+                
+                
+                
+                
+            
+        </div>
+        
+    </body>
+</html>

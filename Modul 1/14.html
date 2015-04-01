@@ -1,0 +1,66 @@
+<!-- På ett torg säljs potatis som kostar 2kr/kg gör ett program som kan räkna ut pris då vi matar in vikten. -->
+
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 14</title>
+        <style>
+            body {
+                text-align: center;
+            }
+            
+            p {
+                margin-bottom: 5px;
+            }
+            
+            input {
+                display: block;
+                margin: 10px auto;
+            }
+            
+            div {
+                border: 1px solid gray;
+                width: 500px;
+                margin: 100px auto;
+                padding: 50px;
+            }
+        </style>
+        
+        <script>
+            function funcPris() {
+                //Deklarerar variabler
+                var pris, kilo, totalt;
+                
+                pris = 2;
+                
+                //Indata antal kilo
+                kilo = parseFloat(document.getElementById("kg").value);
+                
+                //Räknar ut kg-pris i flyttal
+                totalt = parseFloat(2 * kilo);
+                
+                //Utdata till textbox
+                document.getElementById("resultat").value = totalt;
+                
+            }
+        
+        </script>
+        
+    </head>
+    <body>
+        <div>
+            <h1>Prisutäknare</h1>
+            <p>Kilopris = 2kr</p>
+
+            <p>Skriv in antal kilo:</p>
+            <input type="text" id="kg" />
+            <input type="button" id="btn" value="Räkna pris" onClick="funcPris();" />
+            <input type="text" id="resultat" />
+            
+            
+        </div>
+        
+        
+    </body>
+</html>

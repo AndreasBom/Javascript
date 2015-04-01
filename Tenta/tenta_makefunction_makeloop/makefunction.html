@@ -1,0 +1,59 @@
+<!-- Andreas Bom
+
+d) Byt till funktion istället (2p)
+
+Studera koden i makefunction.html (finns på disco - Övriga filer). Den har tre ungefär likadana block som skapar div-element. Det ser lite klumpigt ut. Skriv om koden så att en funktion används istället och de tre div-elementen skapas med tre funktionsanrop istället. Utskriften på websidan ska se likadan ut. -->
+
+
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Make function</title>
+</head>
+<body>
+
+  <h1>Make a function of these three div-creates</h1>
+
+<script>
+
+ //Funktion som skapar div-element
+function makeDiv(name, element, width, height, color) {
+
+  var divName = name;
+  divName = document.createElement(element);
+  divName.style.display = "inline-block";
+  divName.style.width = width + "px";
+  divName.style.height = height + "px";
+  divName.style.background = color;
+  document.body.appendChild(divName);
+}
+
+ //Funktionsanrop
+ makeDiv("first_div", "div", 100, 100, "#923");
+ makeDiv("second_div", "div", 70,70, "#1b3");
+ makeDiv("third_div", "div", 40,40, "#15f");
+
+
+// var first_div = document.createElement("div");
+// first_div.style.display = "inline-block";
+// first_div.style.width = "100px";
+// first_div.style.height = "100px";
+// first_div.style.background = "#923";
+// document.body.appendChild(first_div);
+//
+// var second_div = document.createElement("div");
+// second_div.style.display = "inline-block";
+// second_div.style.width = "70px";
+// second_div.style.height = "70px";
+// second_div.style.background = "#1b3";
+// document.body.appendChild(second_div);
+//
+// var third_div = document.createElement("div");
+// third_div.style.display = "inline-block";
+// third_div.style.width = "40px";
+// third_div.style.height = "40px";
+// third_div.style.background = "#15f";
+// document.body.appendChild(third_div);
+
+</script>
+</body>

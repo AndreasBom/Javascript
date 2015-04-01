@@ -1,0 +1,33 @@
+<!-- Andreas Bom -->
+
+<!-- 14. Gör ett program som frågar efter en text och sedan skriver ut texten flera gånger. Först med bara en bokstav, därefter två, och så vidare. T ex: matar användaren in "Thomas" så ska strängarna "T", "Th", "Tho", "Thom", "Thoma", "Thomas" skrivas ut. -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 14</title>
+
+        <script>
+
+            function stringFunc() {
+                //Input
+                var inputText = document.getElementById("inputText").value;
+
+                //Loopar igenom texten och returnerar den med att öka en bokstav per loop
+                for (var i = 1; i <= inputText.length; i++) {
+                    var output;
+                    output = inputText.substring(0, i);
+                    document.getElementById("result").innerHTML += output + "<br />";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Strängutmataren</h1>
+        <h3>Skriv in en text</h3>
+        <input type="text" id="inputText" />
+        <input type="button" id="btn" value="Ok" onclick="stringFunc();"/>
+        <p id="result"></p>
+    </body>
+</html>

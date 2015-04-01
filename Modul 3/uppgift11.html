@@ -1,0 +1,98 @@
+<!-- Andreas Bom -->
+
+<!-- 11. Återanvänd om möjligt klassen som skapades i föregående övning. Skapa en klass som heter Kundkorg. En kundkorg innehåller flera varor alltså är ett av attributen en array av Varor. Kundvagnen har en metod som heter calcTotal som loopar igenom alla varor i kundvagnen och skriver ut totalpriset någonstans på skärmen. Det är ok att initiera ett antal objekt direkt när sidan laddas. -->
+
+
+<!DOCTYPE html>
+    <html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 11</title>
+        <style>
+            input {
+                display: block;
+                margin-bottom: 10px;
+            }
+        </style>
+        <script>
+
+            //Skapar ett namespace
+            var M11 = {};
+
+            //Klass Vara
+            M11.Vara = function(namn, pris, beskrivning, antal){
+                //Variabler
+                this.namn = namn;
+                this.pris = parseFloat(pris);
+                this.beskrivning = beskrivning;
+                this.antal = parseFloat(antal);
+
+                //Funktion calcSubTotal
+                this.calcSubTotal = function() {
+                    return this.pris*this.antal;
+                };
+
+            };
+
+            //Klass Kundkorg
+            M11.Kundkorg = function() {
+                //Array för att hålla kundens varor
+                this.varukorg  = [];
+
+                //Lägg till vara i kundkorgen
+                this.addItem = function(vara) {
+                    this.varukorg.push(vara);
+                };
+
+                //Räkna ut totalbeloppet
+                this.calcTotal = function() {
+
+                    var sum = 0;
+                    //Loopar igenom varje post i varukorg och adderar priset till summa
+                    this.varukorg.forEach(function(item){
+                        sum += item.pris;
+                    });
+                    return sum;
+                };
+            };
+
+
+            //Deklarerar kunder
+            var kund1;
+            var kund2;
+            var kund3;
+
+            //Test av programmet
+            var init = function() {
+                //instansierade Vara-objekt
+                var dator = new M11.Vara("Dator", 2000, "Bla, Bla", 1);
+                var telefon =  new M11.Vara("Telefon", 1000, "BLABLABLA", 1);
+                var dvd_spelare = new M11.Vara("DVD-spelare", 2500, "Bla Bla Bla Bla Bla", 1);
+
+                kund1 = new M11.Kundkorg();
+                kund1.addItem(dator);
+                kund1.addItem(telefon);
+
+                kund2 = new M11.Kundkorg();
+                kund2.addItem(dvd_spelare);
+                kund2.addItem(dator);
+
+                kund3 = new M11.Kundkorg();
+                kund3.addItem(telefon);
+
+
+                var totaltKund1 = kund1.calcTotal();
+                var totaltKund2 = kund2.calcTotal();
+                var totaltKund3 = kund3.calcTotal();
+
+                console.log("Totalbelopp för kund1: " + totaltKund1 + "\n Totalbelopp för kund2: " + totaltKund2 + "\n Totalbelopp för kund3: " + totaltKund3);
+
+            }(); //funktionen körs direkt m.h.a () i slutet av funktionen
+
+        </script>
+    </head>
+    <body>
+        <h1>Programmet körs i konsolen. </h1>
+
+    </body>
+</html>

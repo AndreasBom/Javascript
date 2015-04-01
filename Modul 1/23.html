@@ -1,0 +1,55 @@
+<!-- Skriv ett program som ber användaren mata in tre tal och skriver ut det största av dem. -->
+
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 23</title>
+        
+        <style>
+            input {
+                display: block;
+                margin: 5px;
+            }
+        </style>
+        
+        <script>
+            
+            function showBiggestNum() {
+                //Variabler
+                var tal1 = parseInt(document.getElementById("tal1").value);
+                var tal2 = parseInt(document.getElementById("tal2").value);
+                var tal3 = parseInt(document.getElementById("tal3").value);
+                var max;
+                
+                //Jämför de olika talen med varandra
+                if (tal1 >= tal2 && tal1 >= tal3) {
+                    max =tal1
+                } else if (tal2 >= tal1 && tal2 >= tal3) {
+                    max = tal2;
+                    console.log("tal2")
+                } else if (tal3 >= tal1 && tal3 >= tal2) {
+                    max = tal3;
+                    console.log("tal3")
+                } 
+                
+                //Skriv ut vad det största talet är
+                document.getElementById("result").innerHTML = "Största talet är: " + max;
+                
+            }
+            
+            
+        </script>
+        
+    </head>
+    <body>
+
+        <h1>Största talet</h1>
+        <p>Skriv in tre tal</p>
+        <input type="text" id="tal1" />
+        <input type="text" id="tal2" />
+        <input type="text" id="tal3" />
+        <input type="button" id="btn" value="Visa största talet" onClick="showBiggestNum();">
+        <p id="result"></p>
+    </body>
+</html>

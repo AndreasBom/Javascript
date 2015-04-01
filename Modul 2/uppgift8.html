@@ -1,0 +1,31 @@
+<!-- 8. Skapa en array med orden "det", "är", "kul", "att", "programmera". Använd en loop för att skriva ut texten "det är kul att programmera". -->
+
+<!DOCTYPE html>
+    <html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 8</title>
+
+        <script>
+
+            //Functionen körs efter att window har laddats
+            window.onload = function() {
+                //Skapar en array
+                var myArray = ['det', 'är', 'kul', 'att', 'programmera'];
+
+                //Stegar igenom arrayn m.h.a foreach-loop
+                myArray.forEach(function(word) {
+
+                    //Skriver ut orden i arrayn till p#"result"
+                    document.getElementById("result").innerHTML += word + " ";
+                })
+            }
+
+        </script>
+
+
+    </head>
+    <body>
+        <p id="result"></p>
+    </body>
+</html>

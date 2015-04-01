@@ -1,0 +1,75 @@
+
+<!-- Skapa ett program där ni matar in två tal. Gör tre olika knappar "+","-","*"  skapa tre olika funktioner för de olika räknesätten och koppla knapparna till rätt funktion. (ett tips är att börja med en av dem och sedan bygga vidare). -->
+
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 12</title>
+        
+        <style>
+            input {
+                display: block;
+                margin-bottom: 15px;
+            }
+            
+            input[type="button"] {
+                display: inline-block;
+                width: 30px;
+            }
+            
+            label {
+                display: block;
+            }
+            
+        </style>
+        
+        <script>
+            
+             //Hämta tal i rutor, beroende på knapptryck väljs räknesätt och kommer in i funktionen som ett argument.
+            function getResult(button_pushed) {
+               
+                var tal1, tal2, arithmetic, result;
+                
+                //Tilldelar variablerna värden och gör dessa till flyttal
+                tal1 = parseFloat(document.getElementById("tal1").value);
+                tal2 = parseFloat(document.getElementById("tal2").value);
+                
+                
+                //Väljer räknesätt baserat på argumentet som funktionen har
+                switch (button_pushed) {
+                        case 'plus':
+                            result = tal1 + tal2;
+                            break;
+                        case 'minus':
+                            result = tal1 - tal2;
+                            break;
+                        case 'multi':
+                            result = tal1 * tal2;
+                            break;
+                }
+                
+                //Returnerar resultatet
+                document.getElementById("result").value = result;
+            }
+        
+        </script>
+
+    </head>
+    <body>
+        <h1>MiniMini-räknare</h1>
+        <h3>Skriv in två tal och välj räknesätt</h3>
+        
+        <form name="calc_Form">
+            <label for="tal1">Tal 1</label>
+            <input type="text" id="tal1"  />
+            <label for="tal2">Tal 2</label>
+            <input type="text" id="tal2" />
+            <input type="button" id="plus" value="+" onClick="getResult('plus')" />
+            <input type="button" id="minus" value="-" onClick="getResult('minus')" />
+            <input type="button" id="multi" value="*" onClick="getResult('multi')" />
+            <label for="Resultat">Resultatet är: </label>
+            <input type="text" id="result" value="" />
+        </form>
+    </body>
+</html>

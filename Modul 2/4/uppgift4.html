@@ -1,0 +1,62 @@
+<!-- Andreas Bom -->
+
+<!-- 4. Lägg de två funktionerna från förra uppgiften, som tar inparametrar och ger returvärde, i en extern javascript fil och länka in den. Testa så det fortfarande fungerar. -->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Uppgift 3</title>
+    <style>
+        p {margin:0; padding: 0;}
+
+    </style>
+    <script type="text/javascript" src="script.js" ></script>
+    <script>
+
+        //Funktion som hämtar input från formulär. Output till dokumentet m.h.a funktioner
+        function calcFunc() {
+            var t1 = parseFloat(document.getElementById("tal1_input").value);
+            var t2 = parseFloat(document.getElementById("tal2_input").value);
+
+            document.getElementById("summa").innerHTML = sumFunc(t1, t2);
+            document.getElementById("produkt").innerHTML = multiFunc(t1, t2);
+            document.getElementById("combo").innerHTML = sumFunc(t1,t2) + multiFunc(t1,t2);
+
+        }
+
+
+    </script>
+
+
+</head>
+<body>
+
+<table>
+    <tr>
+        <td>Tal1 </td>
+        <td><input type="text" id="tal1_input" size="3"/></td>
+    </tr>
+    <tr>
+        <td>Tal2 </td>
+        <td><input type="text" id="tal2_input" size="3"/></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="button" id="btn" value="Calculate" onclick="calcFunc();"/></td>
+    </tr>
+    <tr>
+        <td>Summa</td>
+        <td><p id="summa"></p></td>
+    </tr>
+    <tr>
+        <td>Produkt</td>
+        <td><p id="produkt"></p></td>
+    </tr>
+    <tr>
+        <td>Summan av talen ovan</td>
+        <td><p id="combo"></p></td>
+    </tr>
+</table>
+</body>
+</html>

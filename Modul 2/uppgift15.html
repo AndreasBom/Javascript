@@ -1,0 +1,48 @@
+<!-- Andreas Bom -->
+
+<!-- 15. Gör en funktion (kryptera) som krypterar en text genom att byta ut bokstäverna "o", "e", "t", och "n" till tecknen "!", "#", "%", och "&" (om du vill kan du lägga till lite fler bokstäver som byts ut). Gör också en funktion (dekryptera) som byter tillbaks tecknen till klartext igen. Testa och demonstrera att dina funktioner fungerar. -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 15</title>
+
+        <script>
+
+            //Funktion som byter ut bokstäverna till o,e, t, n
+            function enigma() {
+                var charToChange = ['o', 'e', 't', 'n']; //Bokstäver som ska bytas
+                var charReplacing = ['!', '#', '%', '&']; //Bokstäver som ska ersätta
+                var inputText = document.getElementById("inputText").value;
+
+                //loopar igenom inputText och jämför bokstav för bokstav med charToChange
+                for(var i = 0; i < inputText.length; i++) {
+                    for(var j = 0; j < charToChange.length; j++) {
+                        if(inputText.charAt(i) == charToChange[j]) {
+                            inputText = replaceCharAt(inputText, i, charReplacing[j]);
+                        }
+                    }
+                }
+
+                document.getElementById("result").innerHTML = inputText;
+            }
+
+            //Funktion som tar in en sträng, ett index där bokstaven ska bytas och själva bokstaven som ska bytas
+            function replaceCharAt(str, index, char) {
+                return str.substr(0, index) + char + str.substr(index+char.length);
+            }
+
+
+
+
+        </script>
+    </head>
+    <body>
+    <h1>Enigma</h1>
+    <h3>Skriv in en text som ska krypteras</h3>
+    <input type="text" id="inputText" />
+    <input type="button" id="btn" value="Ok" onclick="enigma();"/>
+    <p id="result"></p>
+    </body>
+</html>

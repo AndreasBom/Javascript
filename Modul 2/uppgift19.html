@@ -1,0 +1,51 @@
+<!-- Andreas Bom -->
+
+<!-- 19. Gör en sida som visar en text med olika fontstorlekar. Fråga användaren först efter en text och ett antal gånger att visa texten. Skapa därefter en massa element som visar texten från användaren (så många element som användaren valde). Varje text ska ha lite större fontstorlekar. Variera, till exempel, storleken från 10% upp till 200% i lagom många steg. -->
+
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 19</title>
+
+        <script>
+
+            //Funktion som tar in en text och antal gånger som denna ska visas.
+            function showText() {
+                //Variabler
+                var times = document.getElementById("times").value;
+                var text = document.getElementById("txt").value;
+                var fontsizeStart = 10;
+                var fontsizeEnd = 200;
+                var fontsizeSteps = fontsizeEnd/times;
+
+
+                //Loopar det antal gånger som användaren skriver in. En div för varje loop skapas
+                for(var i = 0; i < times; i++) {
+                    var divTagg = document.createElement("div");
+                    divTagg.style.fontSize = parseInt(fontsizeStart + (fontsizeSteps*i)) + "px";
+                    divTagg.innerHTML = text;
+                    document.body.appendChild(divTagg);
+                    console.log(divTagg.style.fontSize);
+
+                }
+            }
+
+        </script>
+
+    </head>
+    <body>
+        <style>
+            label, input,textarea {
+                display: block;
+            }
+        </style>
+        
+        <label for="txt">Skriv in en text</label>
+        <textarea id="txt" cols="30" rows="10"></textarea>
+        <label for="times">Hur många gånger ska texten visas?</label>
+        <input type="text" id="times" size="4"/>
+        <input type="button" id="btn" value="Ok" onclick="showText();"/>
+    </body>
+</html>

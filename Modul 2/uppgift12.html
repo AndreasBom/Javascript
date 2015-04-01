@@ -1,0 +1,73 @@
+<!-- Andreas Bom -->
+
+<!-- 12: Gör ett program som demonstrerar strängmetoderna: slice(), split(), och join(). -->
+
+<!DOCTYPE html>
+    <html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 12</title>
+
+        <script>
+
+            //Array med privata mailadresser
+            var mailArray = ['andreas.bom@outlook.se', 'kalle.bengtsson@gmail.com','lisa.nilsson@outlook.com', 'stina.johansson@handelsbanken.se', 'pelle.gustavsson@handelsbanken.se', 'gunnar.ölund@hotmail.com', 'moa.svenningsson@hv.se'];
+
+            //funktion för att få fram för och efternamn. Används i funktionen createUserMail()
+            function getNameFromMail(mailadress) {
+                var fullname = mailadress.split("@"); //delar mailadressen vid @-tecknet
+                var name = fullname[0].split("."); // delar namndelen vid punkten
+                return name;
+            }
+
+            //Funktion för att skapa en studentmail, användarnamnet skapas av de 2 första bokstäverna i för- och efternamnet, baserat på deras privata mailadress. Därefter läggs @student.hv.se till.
+            function createUserMail(mailadress) {
+                //namn blir en array med 2 poster, för och efternamn. Resterande del av mailandressen kastas
+                var name = getNameFromMail(mailadress);
+
+                //användarnamnet är de två första bokstäverna i för- och efternamnet.
+                var initialsFirstName = name[0].slice(0,2);
+                var initialsLastName = name[1].slice(0,2);
+                var suffix = "@student.hv.se";
+
+                //Funktionen returnerar den nya studentmailadressen
+                return initialsFirstName + initialsLastName + suffix;
+            }
+
+            //Tar en array och gör om denna till en sträng med alla mailadresserna. Adresserna separeras med ", "
+            function printMailList(mailaddressArray) {
+                var list = mailaddressArray.join(", ");
+
+                return list;
+            }
+
+
+
+            //************ Interface mot HTML *****************
+
+            //Funktion som använder createUsermail och skapar en ny maillista. Gör om denna till en textsträng och skriver ut i dokumentet
+            function createMailAndShow() {
+                //Deklarerar en ny array
+                var mailList = [];
+
+
+                //Loopar igenom orginallistan med mailadresser och använder createUserMail för att skapa en ny maillista med studentmail.
+                for(var i =0; i < mailArray.length; i++) {
+
+                    var tmpMail = createUserMail(mailArray[i]);
+                    mailList[mailList.length] = tmpMail
+                }
+
+                //Listan görs om till en sträng och skrivs ut i dokumentet.
+                var mailListString = printMailList(mailList);
+                document.getElementById("mail").innerHTML = mailListString;
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1>Högskolans MailSkaparApp</h1>
+        <input type="button" id="btn" value="Skapa mailadresser" onclick="createMailAndShow();"/>
+        <p id="mail"></p>
+    </body>
+</html>

@@ -1,0 +1,80 @@
+<!-- Andreas Bom -->
+
+<!-- 16. I filen modul2-yr.js på disco hittar du en text som är ett utdrag ur den xml-fil man kan få från yr.no (en vädertjänst). Skriv ett program som utgår från texten som en enda sträng (inkludera texten som en extern js-fil). Bryt därefter sönder strängen så att varje rad läggs i en array. Sök sedan igenom arrayen, rad för rad, och skriv ut följande information: Från "time" raden, plocka ut from-tiden (delsträngen innanför citattecknen) och skriv ut den. Från "temperature" raden, plocka ut temperatursiffran och skriv ut. Övriga rader kan hoppas över. -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 16</title>
+        <script src="http://disco.hv.se/courses/8806/144365/files/modul2_yr.js"></script>
+        <script>
+
+
+
+            //Körs efter att dokumentet har laddats klart
+            window.onload = function() {
+                //Sparar objekt till tempObj och skriver ut dessa till dokumentet
+                var tempObj = findTemp();
+                writeTemp(tempObj);
+            }
+
+
+
+                //Funktion för att hitta temperatur och tid
+                    //Indata = från .js-fil, utdata = objekt med en array för tid och en för temperatur
+                function findTemp() {
+                    //Array som sparar tider och en som sparar temperaturer
+                    var timeArray = [];
+                    var tempArray = [];
+
+                    //Array som sparar hela textmassan rad för rad
+                    var strArray = xmlYr.split('\n');
+
+                    //Loop som sparar tider till timeArray
+                    for (var i = 0; i < strArray.length; i=i+10) {
+                        var index = strArray[i].indexOf("from");
+                        timeArray.push(strArray[i].slice(index + 6, 34));
+                    }
+
+                    //Loop som sparar temperaturer till tempArray
+                    for (var i = 7; i < strArray.length; i=i+10) {
+                        var indexTemp = strArray[i].indexOf("temperature");
+                        tempArray.push(strArray[i].slice(indexTemp + 34, 45));
+                    }
+
+                    //Rensa ental från tecknet " genom att göra sträng till heltal
+                    for(var i = 0; i < tempArray.length;i++) {
+                        tempArray[i] = parseInt(tempArray[i]);
+                    }
+
+                    //Ett objekt returneras
+                    return {
+                        time: timeArray,
+                        temp: tempArray
+                    }
+
+                }
+
+                //Funktion som skriver ut till dokumentet
+                function writeTemp(tempObj) {
+
+                    //Loopar igenom objektet's temp och time, samt skriver till dokumentet
+                    for(var i =0;i < tempObj.temp.length;i++) {
+                        var element = document.createElement("p"); //Skapar en p-tagg
+                        var tid = tempObj.time[i].replace("T", " kl "); //Byter ut T mot kl
+                        element.innerHTML = tid + "  " + tempObj.temp[i] + " grader"; //Skriver tid och temp
+                        document.body.appendChild(element); //Fäster p-taggen under body-taggen
+
+                    }
+
+
+                }
+
+        </script>
+    </head>
+    <body>
+        <h1>Temperaturer</h1>
+
+    </body>
+</html>

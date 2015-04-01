@@ -1,0 +1,99 @@
+<!-- Andreas Bom -->
+
+<!-- 10. Bygg ut uppgiften innan med en funktion (getNames) som returnerar alla namn (i form av en array) som har ett visst betyg -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 10</title>
+
+        <script>
+
+            //två arrayer, name och grade
+            var nameArray  =  ["Klara", "Andrea", "Emil", "Sarah", "Alicia", "Victor", "Thomas", "Robert"];
+            var gradeArray = ["A", "B", "C", "A", "D", "C", "E", "E"];
+
+
+            //function getGrade()
+                //Söker efter namn och returnerar betyget om namnet hittas i nameArray
+            function getGrade(nameIn) {
+
+                nameIn = firstToUpper(nameIn); //Försäkrar att första bokstaven i namnet är stor bokstav
+                var indexOfName = nameArray.indexOf(nameIn); //Letar upp indexet i arrayn
+                var gradeBasedOnName = gradeArray[indexOfName]; //använder indexet i nameArray för att hitta motsvarande betyg i gradeArray
+
+                //Om namnet finns returneras betyger, annars visas information om att namnet ej finns
+                if (gradeBasedOnName) {
+                    return gradeBasedOnName;
+                }else {
+                    return "Namnet finns inte registrerat.";
+                }
+            }
+
+            //Function getNames()
+                //Söker efter namn som har ett specificerat betyg
+            function getNames(gradeIn) {
+                var nameArrayBasedOnGrade = []; //Skapar en array för att hålla namet på de som har aktuellet betyg
+
+                //Letar igenom gradeArray efter eftersökt betyg och sparar namnet till nameArrayBasesdOnGradeArray
+                for (var i = 0; i < nameArray.length; i++) {
+                    if (gradeArray[i] == gradeIn) {
+                        nameArrayBasedOnGrade[nameArrayBasedOnGrade.length] = nameArray[i];
+                    }
+                }
+
+                //Om betyget finns, returneras namnen, annars visas information om att betyget ej finns
+                if (nameArrayBasedOnGrade[0] != undefined) {
+                    return nameArrayBasedOnGrade;
+                }else {
+                    return "Ingen med det betyget finns registrerad.";
+                }
+
+
+            }
+
+
+
+            //********* INTERFACES mot HTML-dokumentet *********************
+
+            //Function som hämtar in namn från användaren och skriver ut betyget i dokumentet
+            function showGrade () {
+                //In
+                var nameInput = document.getElementById("inputName").value;
+
+               //Ut
+                document.getElementById("result").innerHTML = getGrade(nameInput);
+            }
+
+            function showNames() {
+                //In
+                var gradeInput = firstToUpper(document.getElementById("inputGrade").value);
+
+                //Ut
+                var namesWithGrade = getNames(gradeInput); //namesWithGrade = en array som returneras från funktionen getNames
+                //Skriver ut namnen i arrayn till dokumentet
+                document.getElementById("result").innerHTML = namesWithGrade;
+
+            }
+
+
+            //**********  Generella functioner *****************************
+
+            //Function för att göra första bokstaven i namnet till stor bokstav.
+            function firstToUpper(string){
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+
+        </script>
+    </head>
+    <body>
+    <input type="text" size="10" id="inputName" value="Skriv in namn" onclick="this.value='';">
+    <input type="button" id="btnShowGrade" value="Hämta betyg" onclick="showGrade();"/>
+    <input type="text" size="8" id="inputGrade" value="Skriv in betyg" onclick="this.value='';"/>
+    <input type="button"  id="btnShowNames" value="Visa Alla Namn" onclick="showNames();"/>
+    <h3>Sökresultat</h3>
+    <p id="result"></p>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!-- Andreas Bom -->
+
+<!-- 9. Morgan, som är högstadielärare, behöver ett register för att hålla ordning på sina elevers betyg. Antag att du har två arrayer, en med namn och en med betyg. Exempelvis: namn = ["Klara", "Andrea", "Emil", "Sarah", "Alicia", "Victor", "Thomas", "Robert"] med betygen: betyg = ["A", "B", "C", "A", "D", "C", "E", "E"]. Gör därefter en funktion (getGrade) som söker efter ett namn och returnerar betyget (första matchande namnet räcker). Gör därefter en sida som testar och demonstrerar din nya funktion (automatiskt när sidan laddas eller via en knapptryckning). Arrayerna namn och betyg kan vara globala variabler eller, lite snyggare, lokala variabler som skickas som indata till funktionerna. -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 9</title>
+
+        <script>
+
+            //två arrayer, name och grade
+            var nameArray  =  ["Klara", "Andrea", "Emil", "Sarah", "Alicia", "Victor", "Thomas", "Robert"];
+            var gradeArray = ["A", "B", "C", "A", "D", "C", "E", "E"];
+
+            //function getGrade()
+                //Söker efter namn och returnerar betyget om namnet hittas i nameArray
+            function getGrade(nameIn) {
+
+                nameIn = firstToUpper(nameIn);
+                var indexOfName = nameArray.indexOf(nameIn);
+                console.log("indexOfName " + indexOfName);
+                var gradeBasedOnName = gradeArray[indexOfName];
+
+                console.log("gradeBasedOnName " + gradeBasedOnName);
+
+                if (gradeBasedOnName) {
+                    return gradeBasedOnName;
+                }else {
+                    return "Namnet finns inte registrerat.";
+                }
+            }
+
+            //Function som hämtar in namn från användaren och skriver ut betyget i dokumentet
+            function showGrade () {
+                var nameInput = document.getElementById("inputName").value;
+                console.log("nameInput " + nameInput);
+
+                document.getElementById("result").innerHTML = getGrade(nameInput);
+            }
+
+            //Function för att göra första bokstaven i namnet till stor bokstav.
+            function firstToUpper(string){
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <input type="text" size="10" id="inputName" >
+        <input type="button" id="btn" value="Hämta betyg" onclick="showGrade();"/>
+        <p id="result"></p>
+    </body>
+</html>

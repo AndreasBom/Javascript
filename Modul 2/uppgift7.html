@@ -1,0 +1,31 @@
+<!-- Andreas Bom -->
+
+<!-- 7. Skapa en array med orden "Hej", "Nej", "EJ", "Leverpastej", "42". Slumpa fram ett av orden och visa dem med valfri metod när ni trycker på en knapp. -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 7</title>
+
+        <script>
+
+            //Skapar en Array
+            var myArray = ['Hej','Nej','Ej','Leverpastej', '42'];
+
+            function randomWord() {
+                //Slumpa tal mellan 0-4. random * ((x-y)-1 + y)
+                var index = Math.floor(Math.random() * ((4-0)+1) + 0 );
+
+                //output
+                document.getElementById("result").innerHTML = myArray[index];
+                console.log(index);
+            }
+
+        </script>
+    </head>
+    <body>
+        <button type="button" onclick="randomWord();">Slumpa ord</button>
+        <p id="result"></p>
+    </body>
+</html>

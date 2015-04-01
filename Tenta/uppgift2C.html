@@ -1,0 +1,62 @@
+<!-- Andreas Bom
+
+c) Inmatning av nya djurtyper (1p)
+
+Gör så att användaren kan mata in nya djurtyper och antal-värden som läggs sist i listan. Websidan ska uppdatera sig med den nya listan. Utgå från det du gjort i a) eller b). -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 2C</title>
+    </head>
+    <body onload="showList();">
+        <label for="textBoxDjur" style="display: block">Djur</label>
+        <input type="text" id="textBoxDjur"/>
+        <label for="textBoxAntal" style="display: block;">Antal</label>
+        <input type="text" id="textBoxAntal"/>
+        <input type="button" value="Lägg till" id="btn" onclick="addToList(textBoxDjur.value, textBoxAntal.value)"/>
+        <p id="result"></p>
+    <script>
+
+        var typ = ["Hamster", "Kanin", "Undulat", "Hund"];
+        var antal = [3, 1, 9, 5];
+
+        //Variabler
+        var output = "";
+        var antalDjur = 0;
+
+
+        //Funktion som visar listan med djur
+        function showList() {
+            //Rensar den gamla listan
+            output = "";
+
+            //Loop som kör igenom typ-arrayn och adderar antal djur från antal.arrayn
+            for(var i = 0; i < typ.length; i++){
+                antalDjur = antal[i];
+                for(var j = 0; j < antalDjur; j++ ){
+                    output += typ[i] + "<br />";
+                }
+            }
+            //Skriver ut
+            document.getElementById("result").innerHTML = output;
+
+        }
+
+
+        //Funktion som lägger till fler djur och som körs när knappen klickas
+        function addToList(itemToAdd, number){
+            typ.push(itemToAdd);
+            antal.push(number);
+            showList();
+        }
+
+        //Skriver till webbdokumentet
+
+
+
+    </script>
+
+</body>
+</html>

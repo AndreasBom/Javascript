@@ -1,0 +1,56 @@
+
+<!-- Skapa ett program där ni matar in två tal. när man trycker på en knapp skall summan av de båda talen visas i en annan textruta. -->
+
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 11</title>
+    </head>
+    
+        <style>
+            input {
+                display: block;
+                margin-bottom: 15px;
+            }
+            
+            #button {
+                position: relative;
+                top: -13px;
+            }
+            
+        </style>
+
+       <!-- Script -->
+        <script>
+            
+            //Hämta värde från tal1 och tal2, returnera summan
+            function addNum() {
+                
+                var Numbertal1, tal2;
+                
+                tal1 = parseFloat(document.getElementById("tal1").value); // Hämtar värde och gör om från sträng till flyttal
+                tal2 = parseFloat(document.getElementById("tal2").value);
+                
+                document.getElementById("result").value = tal1 + tal2;
+            }
+
+        </script>
+    
+    <body>
+
+        
+        <h1>Summan av två tal</h1>
+        
+        <form name="summaForm">
+            <label for="tal1">Tal 1</label>
+            <input type="text" id="tal1"  />
+            <label for="tal2">Tal 2</label>
+            <input type="text" id="tal2" />
+            <input type="button" id="button" value="Addera tal" onClick="addNum();" />
+            <label for="Resultat">Summan av talen är: </label>
+            <input type="text" id="result" value="" />
+        </form>
+
+    </body>
+</html>

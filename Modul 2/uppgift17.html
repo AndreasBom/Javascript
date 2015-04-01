@@ -1,0 +1,28 @@
+<!-- Andreas Bom -->
+
+<!-- 17. Gör en sida som innehåller en knapp. När man trycker på knappen skall texten "God Jul" skrivas ut som ett h1 element (ett nytt h1-element ska läggas till) inuti body-elementet. Färgen på God Jul skall vara röd. -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 17</title>
+
+        <script>
+            function writeToDoc() {
+
+                var txt = "God Jul";
+
+                var h1 = document.createElement("h1");
+                h1.innerHTML = txt;
+                h1.style.color = "red";
+                document.body.appendChild(h1);
+
+            }
+
+        </script>
+    </head>
+    <body>
+        <button id="btn" onclick="writeToDoc();">Tryck</button>
+    </body>
+</html>

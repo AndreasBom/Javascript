@@ -1,0 +1,46 @@
+<!-- Andreas Bom
+
+a) Enkel utskrift av två arrayer (1p)
+
+Antag att du har två arrayer "typ" och "antal" som lagrar en invertarielista med djur i en djuraffär. Exempelvis:
+
+   var typ = ["Hamster", "Kanin", "Undulat", "Hund"];
+   var antal = [3, 1, 9, 5];
+
+Detta betyder att djuraffären har 3 st hamstrar, 1 st kanin, 9 st undulater
+och 5 st hundar.
+
+Gör en websida som listar inventarielistan. Använd valfritt sätt att skriva ut men varje djur ska åtminstone hamna på olika rader på sidan. -->
+
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 2A</title>
+    </head>
+    <body>
+        <h1>Invetarielista</h1>
+        <p id="result"></p>
+
+        <script>
+            var typ = ["Hamster", "Kanin", "Undulat", "Hund"];
+            var antal = [3, 1, 9, 5];
+
+            //Variabler
+            var output = "";
+            var antalDjur = 0;
+
+            //Loop som kör igenom typ-arrayn och adderar antal djur från antal.arrayn
+            for(var i = 0; i < typ.length; i++){
+                antalDjur = antal[i];
+                for(var j = 0; j < antalDjur; j++ ){
+                    output += typ[i] + "<br />";
+                }
+            }
+
+            //Skriver till webbdokumentet
+            document.getElementById("result").innerHTML = output;
+        </script>
+    </body>
+</html>

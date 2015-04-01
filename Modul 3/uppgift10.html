@@ -1,0 +1,101 @@
+<!-- Andreas Bom -->
+
+<!-- 10. Skapa en klass som heter Vara den skall innehålla följande attribut: namn, pris, beskrivning, antal samt en metod som heter calcSubTotal. calcSubTotal skall returnera pris*antal (alternativt skriv ut totalpriset någonstans på sidan) skapa ett objekt av denna klass direkt när sidan laddas. Anropa metoden calcSubTotal genom att trycka på en knapp. -->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Uppgift 10</title>
+
+    <style>
+        input {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+    
+    <script>
+
+        //Skapar ett namespace
+        var M10 = {};
+
+        //Klass Vara
+        M10.Vara = function(namn, pris, beskrivning, antal){
+            //Variabler
+            this.namn = namn;
+            this.pris = parseFloat(pris);
+            this.beskrivning = beskrivning;
+            this.antal = parseFloat(antal);
+
+            //Funktion calcSubTotal
+            this.calcSubTotal = function() {
+                return this.pris*this.antal;
+            };
+
+        };
+
+        //Funktion som hämtar input från användaren och returnerar ett objekt med värdet
+        M10.getInput = function() {
+            var namn = document.getElementById("namn").value;
+            var pris = document.getElementById("pris").value;
+            var beskrivning = document.getElementById("beskrivning").value;
+            var antal = document.getElementById("antal").value;
+
+
+            return {
+                namn:namn,
+                pris:pris,
+                beskrivning:beskrivning,
+                antal:antal
+            }
+        };
+
+        //Funktion som körs efter att sidan har laddats in
+        window.onload = function() {
+
+            //Skapar ett objekt som tar emot objektet som returneras av getInput()
+            param = {};
+            param = M10.getInput();
+            //Nytt objekt skapas av klassen Vara{}. Parametrarna tas från param{}
+            nyVara = new M10.Vara(param.namn, param.pris, param.beskrivning, param.antal );
+        }
+
+
+        //Funktion som körs när knappen trycks
+        M10.btnClick = function() {
+            //Läser in användarinput och tilldelar dessa till funktionens variabler
+            param = M10.getInput();
+            //Tilldelar nyVara's variabler nya värden baserat på användarinput
+            nyVara.antal = param.antal;
+            nyVara.pris = param.pris;
+
+            //Kalkulerar belopp och skriver till dokumentet
+            var prod = nyVara.calcSubTotal();
+            document.getElementById("result").innerHTML = prod;
+        };
+
+    </script>
+</head>
+<body>
+    <div>
+        <label for="namn">Produkt</label>
+        <input type="text" id="namn" value="Dator" readonly="true"/>
+        <label for="pris">Pris</label>
+        <input type="text" id="pris" value="3500"/>
+        <label for="beskrivning">Beskrivning</label>
+        <input type="text" id="beskrivning" value="Bla, Bla, Bla" readonly="true"/>
+        <label for="antal">Antal</label>
+        <input type="text" id="antal" value="3"/>
+        <button id="btn">Beräkna pris</button>
+
+
+    </div>
+    <p id="result"></p>
+
+    <script>
+        //Eventlyssnare som körs när knappen trycks
+        document.getElementById("btn").addEventListener('click',M10.btnClick);
+    </script>
+</body>
+</html>

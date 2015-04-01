@@ -1,0 +1,38 @@
+<!-- Andreas Bom
+
+c) Byt till loop istället (1p)
+
+Studera koden i makeloop.html (finns på disco - Övriga filer). Den har många ungefär likadana rader. Skriv om programmet så att en loop används istället. Utskriften ska bli samma på websidan. -->
+
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Make loop</title>
+</head>
+<body>
+
+<h1>Make into loop instead</h1>
+
+<p id="output">
+
+<script>
+ var output = "";
+
+ //Loop som kör 5:ans multiplikationstabell
+ for(var i = 1; i <= 6; i++){
+   output += i + " x 5 = " + i*5 + "<br />";
+ }
+
+
+// output += "1 x 5 = 5<br>"
+// output += "2 x 5 = 10<br>"
+// output += "3 x 5 = 15<br>"
+// output += "4 x 5 = 20<br>"
+// output += "5 x 5 = 25<br>"
+// output += "6 x 5 = 30<br>"
+
+ var outputelem = document.getElementById("output");
+ outputelem.innerHTML = output;
+
+</script>
+</body>

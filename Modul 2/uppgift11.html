@@ -1,0 +1,150 @@
+<!-- Andreas Bom -->
+
+<!-- 11. Bygg vidare uppgiften med en funktion (sortNames) som returnerar alla elever sorterade i betygsordning. Tips: använd den inbyggda sorteringen (lite klurigt), skriv en egen sorteringsalgoritm (t ex sök på "insertion sort" - också lite klurigt) eller fuska lite: anropa den tidigare funktionen getNames för att få alla namn som har "A", därefter igen för att få alla "B", osv. Lägg ihop alla svar så har du namnen sorterade i betygsordning. -->
+
+<!DOCTYPE html>
+    <html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 11</title>
+
+        <script>
+
+            //två arrayer, name och grade
+            var nameArray  =  ["Klara", "Andrea", "Emil", "Sarah", "Alicia", "Victor", "Thomas", "Robert"];
+            var gradeArray = ["A", "B", "C", "A", "D", "C", "E", "E"];
+
+
+            //function getGrade()
+                //Söker efter namn och returnerar betyget om namnet hittas i nameArray
+            function getGrade(nameIn) {
+
+                nameIn = firstToUpper(nameIn);
+                var indexOfName = nameArray.indexOf(nameIn);
+                var gradeBasedOnName = gradeArray[indexOfName];
+
+                if (gradeBasedOnName) {
+                    return gradeBasedOnName;
+                }else {
+                    return "Namnet finns inte registrerat.";
+                }
+            }
+
+            //Function getNames()
+                //Söker efter namn som har ett specificerat betyg
+            function getNames(gradeIn) {
+                var nameArrayBasedOnGrade = [];
+
+                for (var i = 0; i < nameArray.length; i++) {
+                    if (gradeArray[i] == gradeIn) {
+                        nameArrayBasedOnGrade[nameArrayBasedOnGrade.length] = nameArray[i];
+                    }
+                }
+
+                return nameArrayBasedOnGrade;
+
+            }
+
+            //Function sortNames()
+                //Referens till algoritm http://www.nczonline.net/blog/2012/09/17/computer-science-in-javascript-insertion-sort/
+                // Funktionaliteten förändrades från referensen så att istället två arrayer sorteras och två arrayer returneras
+
+            function sortNames(grade, name) {
+
+                var len = grade.length;
+                var valueGrade, valueName, i, j;
+
+                for (i=0; i < len; i++) {
+                    valueGrade = grade[i];
+                    valueName = name[i];
+
+                    for (j=i-1; j > -1 && grade[j] > valueGrade; j--) {
+                        grade[j+1] = grade[j];
+                        name[j+1] = name[j];
+                    }
+
+                    grade[j+1] = valueGrade;
+                    name[j+1] = valueName;
+                }
+
+                return {
+                    'namn':name,
+                    'betyg':grade
+                }
+            }
+
+            //********* INTERFACES mot HTML-dokumentet *********************
+
+            //Function som hämtar in namn från användaren och skriver ut betyget i dokumentet
+            function showGrade () {
+                //Rensar gammal data i dokumentet
+                document.getElementById("result").innerHTML = '';
+                document.getElementById("betyg").innerHTML = '';
+
+                //In
+                var nameInput = document.getElementById("inputName").value;
+
+                //Ut
+                document.getElementById("result").innerHTML = getGrade(nameInput);
+            }
+
+            //Function som visar alla namn med ett visst betyg
+            function showNames() {
+                //Rensar gammal data i dokumentet
+                document.getElementById("result").innerHTML = '';
+                document.getElementById("betyg").innerHTML = '';
+
+                //In
+                var gradeInput = firstToUpper(document.getElementById("inputGrade").value);
+
+                //Ut
+                var namesWithGrade = getNames(gradeInput); //namesWithGrade = en array som returneras från funktionen getNames
+                //Skriver ut namnen i arrayn till dokumentet
+                document.getElementById("result").innerHTML = namesWithGrade;
+
+            }
+
+
+            //Visa alla namn där betygen är sorterade
+            function showAll() {
+                //Rensar gammal data i dokumentet
+                document.getElementById("result").innerHTML = '';
+                document.getElementById("betyg").innerHTML = '';
+
+                //sorterar arrayer efter betyg och tilldelar till två variabler -> namn och betyg
+                var namn = sortNames(gradeArray, nameArray).namn;
+                var betyg = sortNames(gradeArray,nameArray).betyg;
+
+                //Loopar igenom arrayer och skriver ut till dokumentet
+                namn.forEach(function(namnItem){
+                    document.getElementById("result").innerHTML += namnItem + "<br /> ";
+                });
+
+                betyg.forEach(function(betygItem){
+                    document.getElementById("betyg").innerHTML += betygItem + "<br /> ";
+                })
+            }
+
+
+            //**********  Generella funktioner *****************************
+
+            //Function för att göra första bokstaven i ordet till stor bokstav.
+            function firstToUpper(string){
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <h1>Betygsdatabas</h1>
+        <input type="text" size="10" id="inputName" value="Skriv in namn" onclick="this.value='';">
+        <input type="button" id="btnShowGrade" value="Hämta betyg" onclick="showGrade();"/>
+        <input type="text" size="8" id="inputGrade" value="Skriv in betyg" onclick="this.value='';"/>
+        <input type="button"  id="btnShowNames" value="Visa Namn efter betyg" onclick="showNames();"/>
+        <input type="button" id="btnShowAll" value="Visa Alla" onclick="showAll();"/>
+        <h3>Sökresultat</h3>
+        <p id="result" style="display: inline-block"></p>
+        <p id="betyg" style="display: inline-block"></p>
+    </body>
+</html>

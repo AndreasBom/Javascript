@@ -1,0 +1,79 @@
+<!-- I många idrotter erhålls de tävlandes poäng som summan av alla domarpoäng sedan den högsta och lägsta poängen dragits av. Skriv ett program som frågar efter en 10 domarpoäng, summerar poängen och håller reda på den minsta och den högsta poängen. När beräkning sker ska den tävlandes totalpoäng visas sedan man dragit av den högsta och lägsta poängen. -->
+
+<!DOCTYPE html>
+    <html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 26</title>
+        <style>
+            
+            body {
+                text-align: center;
+            }
+            input {
+                display: block;
+                margin: 5px auto;
+            }
+        
+        </style>
+        
+        
+        <script>
+            
+            function getScore() {
+                
+                //variabler
+                var totalt = 0;
+                var pointsArray = []; //Deklarerar en tom array
+                
+                //Sparar alla element med classnamnet "scoreBox" till en NodeList
+                var points = document.getElementsByClassName("scoreBox");
+                
+                
+                
+                for (var i = 0; i < points.length; i++) {
+                    
+                    //Sparar domarnas poäng till en array
+                    pointsArray[i] = parseInt(points[i].value);
+                }
+                
+                //Sorterar listan
+                pointsArray.sort(function(a,b){return a-b});
+                    
+
+                //Loopar igenom arrayn, med början på andra posten och slutar på näst sista
+                for (var i = 1; i < pointsArray.length - 1; i++) {
+                    totalt += Number(points[i].value);
+                    console.log(pointsArray[i]);
+                }
+                
+                console.log("Totalpoäng efter avräkning: " + totalt);
+                document.getElementById("result").innerHTML = "Den totala poängen, (minus minsta och högsta) är " + totalt;
+                
+                
+            }
+            
+        </script>
+        
+    </head>
+    <body>
+        
+        <h1>Domarpoäng</h1>
+        
+        <p>Skriv in de 10 domarpoängen</p>
+        
+        <input type="text" id="a1" class="scoreBox" />
+        <input type="text" id="a2" class="scoreBox" />
+        <input type="text" id="a3" class="scoreBox" />
+        <input type="text" id="a4" class="scoreBox" />
+        <input type="text" id="a5" class="scoreBox" />
+        <input type="text" id="a6" class="scoreBox" />
+        <input type="text" id="a7" class="scoreBox" />
+        <input type="text" id="a8" class="scoreBox" />
+        <input type="text" id="a9" class="scoreBox" />
+        <input type="text" id="a10" class="scoreBox" />
+        <input type="button" id="btn" value="OK" onClick="getScore();"/>
+        <p id="result"></p>
+        
+    </body>
+</html>

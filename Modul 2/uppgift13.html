@@ -1,0 +1,50 @@
+<!-- Andreas Bom -->
+
+<!-- 13. Det finns även andra strängmetoder som är väldigt användbara: indexOf(), charAt(), toUpperCase(), och toLowerCase(). Läs på hur dessa fungerar och skriv ett program som demonstrerar dessa metoder.(kolla boken) -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 13</title>
+
+        <script>
+
+
+
+            function createPassword() {
+
+                var password;
+
+                //Användarens mailadress
+                var username = document.getElementById("username").value;
+
+                //Säkerställer att alla inmatade bokstäver är små bokstäver
+                username = username.toLowerCase();
+
+                //Lösenordsgenerator baserat på mailadress
+                var one = username.charAt(2);
+                one = one.toUpperCase();
+                var two = username.indexOf("@");
+                var three = username.charAt(two - 1);
+                var rnd = Math.floor(Math.random() * ((25 - 0) + 1) + 0);  //((upperLimit - lowerLimit)+1) + lowerLimit
+                var four = String.fromCharCode(97 + rnd); //ger en liten bokstav utifrån en siffra mellan 97-149
+                var rnd = Math.floor(Math.random() * ((25 - 0) + 1) + 0);
+                var five = String.fromCharCode(65 + rnd); //ger en stor bokstav utifrån en siffra mellan 65-117
+                var six = username.length;
+                password = one + two + three + four + five + six;
+
+                document.getElementById("password").innerHTML = "Lösenord: " + password;
+
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1>Lösenordsgenerator</h1>
+        <label for="username">Skriv in din mailadress</label>
+        <input type="text" id="username" style="display: block;"/>
+        <p id="password" style="margin: 0; padding: 10px 0 10px 0;"></p>
+        <input type="button" id="btnOk" value="Skapa lösenord" onclick="createPassword();"/>
+    </body>
+</html>

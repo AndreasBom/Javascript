@@ -1,0 +1,66 @@
+<!-- Andreas -->
+
+<!-- 2. Skapa 3 funktioner och ett formulär. Den första funktionen skall köras när man trycker på knappen och ska använda sig av de andra funktionerna. De andra två funktionerna skall räkna ut summan av två tal och produkten av två tal. -->
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Uppgift 2</title>
+    <style>
+        p {margin:0; padding: 0;}
+
+    </style>
+    <script>
+
+        //Funktion som hämtar input från formulär. Output till dokumentet m.h.a funktioner
+        function calcFunc() {
+            var t1 = parseFloat(document.getElementById("tal1_input").value);
+            var t2 = parseFloat(document.getElementById("tal2_input").value);
+
+            document.getElementById("summa").innerHTML = sumFunc(t1, t2);
+            document.getElementById("produkt").innerHTML = multiFunc(t1, t2);
+
+        }
+
+        //Function som har två parametrar och returnerar summan av dessa tal
+        function sumFunc(tal1, tal2){
+
+            return parseFloat(tal1 + tal2);
+        }
+
+        //Function som två parametrar och returnerar produkten av dessa tal
+        function multiFunc (tal1, tal2){
+
+            return parseFloat(tal1 * tal2);
+        }
+    </script>
+
+</head>
+<body>
+
+    <table>
+        <tr>
+            <td>Tal1 </td>
+            <td><input type="text" id="tal1_input" size="3"/></td>
+        </tr>
+        <tr>
+            <td>Tal2 </td>
+            <td><input type="text" id="tal2_input" size="3"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="button" id="btn" value="Calculate" onclick="calcFunc();"/></td>
+        </tr>
+        <tr>
+            <td>Summa</td>
+            <td><p id="summa"></p></td>
+        </tr>
+        <tr>
+            <td>Produkt</td>
+            <td><p id="produkt"></p></td>
+        </tr>
+    </table>
+</body>
+</html>

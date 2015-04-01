@@ -1,0 +1,268 @@
+<!-- Andreas Bom -->
+
+<!-- 13. Använd (och demonstrera) minst två klasser i ett eget program (fritt val men det får inte vara samma som i tidigare uppgifter) klasserna skall innehålla attribut och metoder. -->
+
+<!DOCTYPE html>
+    <html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Tre i Rad</title>
+
+    </head>
+
+
+    <body>
+        <h1 style="text-align: center">Tre i rad</h1>
+        <div style="width: 300px; margin: 0 auto;">
+            <canvas id="canvas" width="300" height="300" style="border: 1px solid black; margin: 0 auto"></canvas>
+            <button id="newGame">Nytt spel</button>
+        </div>
+
+        <script>
+
+
+            //Namespace
+            var bom = {};
+
+/**************************************************************************************
+ *                  Canvas
+ * ************************************************************************************/
+            //Variabler för canvas
+            bom.canvas = document.getElementById("canvas");
+            bom.ctx = canvas.getContext("2d");
+
+            //Nytt spel instansieras när sidan har laddats
+            window.onload = function () {
+                bom.GameObj = new bom.game();
+
+            };
+/**************************************************************************************
+*                   Objekt och funktioner
+* ************************************************************************************/
+
+
+            //Objekt som innehåller funktioner för att skapa spelplanen
+            bom.Board = function() {
+
+                this.drawBoard = function() {
+                    //Ritar vertikala sträck
+                    for (var i = 100; i < 300; i = i+100){
+                        bom.ctx.beginPath();
+                        bom.ctx.moveTo(i, 0);
+                        bom.ctx.lineTo(i, 300);
+                        bom.ctx.closePath();
+                        bom.ctx.stroke();
+                    }
+
+                    //Ritar horisontella sträck
+                    for (var i = 100; i < 300; i = i+100){
+                        bom.ctx.beginPath();
+                        bom.ctx.moveTo(0, i);
+                        bom.ctx.lineTo(300, i);
+                        bom.ctx.closePath();
+                        bom.ctx.stroke();
+                    }
+                }
+            };
+
+            //Spelplan skapas, körs direkt, m.h.a () efter funktionen
+            bom.newBoard = function() {
+                var board = new bom.Board();
+                board.drawBoard();
+            }();
+
+
+            //Spelobjekt. håller reda på vems tur det är och lägger ut spelmarkörer på rätt plats
+            bom.game = function() {
+                //Spelartur
+                this.p1 = true;
+
+
+                //Positioner på spelplanen, false = ledig, true = upptagen,
+                this.spots = {
+                    n:false,
+                    ne:false,
+                    e:false,
+                    se:false,
+                    s:false,
+                    sv:false,
+                    v:false,
+                    nv:false,
+                    c:false
+                };
+
+                //Turn() Funktion som identifierar celler på spelplanen och som kontrollerar att det är ledigt i aktuell cell
+                this.turn = function(x, y) {
+                    var color;
+                    if (this.p1 == true) {
+                        color = "green"
+                    }else {
+                        color = "red";
+                    }
+
+                    if(x > 0 && x < 100 && y > 0 && y < 100 && this.spots.n == false){
+                        bom.Circle(bom.coordArray[7].x, bom.coordArray[7].y, color);
+                        this.spots.n = true;
+                        this.gamePlayed();
+                    }
+                    else if(x > 100 && x < 200 && y > 0 && y < 100 && this.spots.ne == false){
+                        bom.Circle(bom.coordArray[0].x, bom.coordArray[0].y, color);
+                        this.spots.ne = true;
+                        this.gamePlayed();
+                    }
+                    else if(x > 200 && x < 300 && y > 0 && y < 100 && this.spots.e == false){
+                        bom.Circle(bom.coordArray[1].x, bom.coordArray[1].y, color);
+                        this.spots.e = true;
+                        this.gamePlayed();
+                    }
+                    else if(x > 200 && x < 300 && y > 100 && y < 200 && this.spots.se == false){
+                        bom.Circle(bom.coordArray[2].x, bom.coordArray[2].y, color);
+                        this.spots.se = true;
+                        this.gamePlayed();
+                    }
+                    else if(x > 200 && x < 300 && y > 200 && y < 300 && this.spots.s == false){
+                        bom.Circle(bom.coordArray[3].x, bom.coordArray[3].y, color);
+                        this.spots.s = true;
+                        this.gamePlayed();
+                    }
+                    else if(x > 100 && x < 200 && y > 200 && y < 300 && this.spots.sv == false){
+                        bom.Circle(bom.coordArray[4].x, bom.coordArray[4].y, color);
+                        this.spots.sv = true;
+                        this.gamePlayed();
+                    }
+                    else if(x > 0 && x < 100 && y > 200 && y < 300 && this.spots.v == false){
+                        bom.Circle(bom.coordArray[5].x, bom.coordArray[5].y, color);
+                        this.spots.v = true;
+                        this.gamePlayed();
+                    }
+                    else if(x > 0 && x < 100 && y > 100 && y < 200 && this.spots.nv == false){
+                        bom.Circle(bom.coordArray[6].x, bom.coordArray[6].y, color);
+                        this.spots.nv = true;
+                        this.gamePlayed();
+                    }
+                    else if(x > 100 && x < 200 && y > 100 && y < 200 && this.spots.c == false){
+                        bom.Circle(bom.coordArray[8].x, bom.coordArray[8].y, color);
+                        this.spots.c = true;
+                        this.gamePlayed();
+                    }//Turn() Slut
+                };//game() Slut
+
+
+                //Funktion som byter spelare och som körs efter att brick är utlagd
+                this.gamePlayed = function() {
+                    if(this.p1 == false){
+                        this.p1 = true;
+                    }else {
+                        console.log("false");
+                        this.p1 = false;
+                    }
+                };
+            };
+
+
+            //Circle() Ritar ut en cirkel
+            bom.Circle = function(x, y, color) {
+                bom.ctx.beginPath();
+                bom.ctx.arc(x, y, 40, 0, 2*Math.PI);
+                bom.ctx.closePath();
+                if(color == "red"){
+                    bom.ctx.fillStyle = "#FF0000";
+                }else if (color == "green") {
+                    bom.ctx.fillStyle = "#50a658";
+                }
+                bom.ctx.fill();
+            };
+
+            //Ny tom spelplan, samt initialinställningar
+            bom.newGame = function() {
+                //Raderar allt visuellt på spelplanen
+                bom.ctx.clearRect(0,0,300,300);
+
+                //Kastar objektet om det existerar
+                if(typeof GameObj != "undefined")
+                {
+                    delete bom.GameObj;
+                }
+
+                //Ny spelplan
+                bom.board = new bom.Board();
+                bom.board.drawBoard();
+
+                //Nytt spelarObjekt
+                bom.GameObj = new bom.game();
+
+            };
+
+
+/***********************************************************************************************
+ *                   Eventlyssnare
+************************************************************************************************/
+
+            bom.canvas.addEventListener('click', function(e) {
+
+                bom.GameObj.turn(e.offsetX, e.offsetY);
+                console.log("x: " + e.offsetX + " y: " + e.offsetY);
+            });
+
+            document.getElementById("newGame").addEventListener('click', function(){
+                bom.newGame();
+            });
+
+
+
+/******************************************************************************************
+*                      Data
+ * ***************************************************************************************/
+                //Kordinat på spelplanen
+            bom.coordArray = [
+                n=
+                {
+                    x:150,
+                    y:50
+                },
+                ne=
+                {
+                    x:250,
+                    y:50
+                },
+                e =
+                {
+                    x:250,
+                    y:150
+                },
+                se =
+                {
+                    x:250,
+                    y:250
+                },
+                s =
+                {
+                    x:150,
+                    y:250
+                },
+                sv =
+                {
+                    x:50,
+                    y:250
+                },
+                v =
+                {
+                    x:50,
+                    y:150
+                },
+                nv =
+                {
+                    x:50,
+                    y:50
+                },
+                c =
+                {
+                    x:150,
+                    y:150
+                }
+            ];
+
+
+        </script>
+    </body>
+</html>

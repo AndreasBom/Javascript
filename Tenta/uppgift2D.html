@@ -1,0 +1,80 @@
+<!-- Andreas Bom
+
+d) Svår: Objektorienterad lösning (2p)
+
+Visa hur man skulle kunna bygga upp djurlistan lite mer objektorienterat. Utgå från uppg c ovan och gör allting med klasser och objekt istället. -->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Uppgift 2D</title>
+</head>
+    <body onload="init();">
+    <label for="textBoxDjur" style="display: block">Djur</label>
+    <input type="text" id="textBoxDjur"/>
+    <label for="textBoxAntal" style="display: block;">Antal</label>
+    <input type="text" id="textBoxAntal"/>
+    <input type="button" value="Lägg till" id="btn"/>
+    <p id="result"></p>
+<script>
+
+
+
+    var invList = function() {
+        this.animalList = {
+            hamster:3,
+            Kanin:1,
+            Undulat:9,
+            Hund:5
+        };
+
+
+        this.showList = function(){
+
+            //Rensar den gamla listan
+            output = "";
+
+            for(animal in this.animalList){
+                console.log(animal);
+                for(var i = 0; i < this.animalList[animal]; i ++){
+                    output += animal + "<br />";
+                    console.log(animal);
+                }
+            }
+
+            return output;
+        };
+
+        this.addToList = function(itemToAdd, number) {
+            this.animalList[itemToAdd] = number;
+
+        };
+    };
+
+
+    function init(){
+        //Skapar objekt
+        invObj = new invList();
+
+        //Visar listan
+        var listOfAnimals = invObj.showList();
+        document.getElementById("result").innerHTML = listOfAnimals;
+
+        //Eventlyssnare
+        var btn = document.getElementById("btn").addEventListener('click', function(){
+            invObj.addToList(document.getElementById("textBoxDjur").value, document.getElementById("textBoxAntal").value);
+            //Visar den uppdaterade listan
+            listOfAnimals = invObj.showList();
+            document.getElementById("result").innerHTML = listOfAnimals;
+        });
+    }
+
+
+
+
+
+</script>
+
+</body>
+</html>

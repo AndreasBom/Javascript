@@ -1,0 +1,57 @@
+ <!-- Skriv ett program där användaren matar in antal och styckpris av en vara. Om antal är större än 20 samtidigt som totalpriset är över 1000 kr, får användaren 20 % rabatt. Annars, om antingen antal är större än 20 eller totalpriset är över 1000, får man 10 % rabatt. I övriga fall ges ingen rabatt. Totalpriset och rabatten ska visas. -->
+
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 24</title>
+        <style>
+            input, label {
+                display: block;
+            }
+        </style>
+        
+        <script>
+            
+            function calcPrice() {
+                 //variabler
+                var price, amount, totalNoDiscount, totalWithDiscount, discount;
+                discount = 0;
+                
+                //Indata, görs till flyttal
+                price = parseFloat(document.getElementById("price").value);
+                amount = parseFloat(document.getElementById("amount").value);
+                
+                //Totalkostnad
+                totalNoDiscount = price * amount;
+                
+                //Räkna ut rabatten
+                if (amount > 20 && totalNoDiscount > 1000) {
+                    discount = 0.2; //20% rabatt
+                } else if (amount > 20 || totalNoDiscount > 1000) {
+                    discount = 0.1; //10% rabatt
+                }
+                
+                //Totalkostnad med rabatt
+                totalWithDiscount = totalNoDiscount - (totalNoDiscount * discount);
+                
+                
+                //Output
+                document.getElementById("result").innerHTML = "Priset som kunden ska betala är " + totalWithDiscount + " kr. Rabatt som ges är " + (totalNoDiscount * discount) + "kr";
+                
+            }
+  
+        </script>
+        
+    </head>
+    <body>
+        
+        <h1>Räkna ut rabatt</h1>
+        <label for="price">Pris/styck</label>
+        <input type="text" id="price" />
+        <label for="amount">Antal</label>
+        <input type="text" id="amount" />
+        <input type="button" id="btn" value="Beräkna" onClick="calcPrice();">
+        <p id="result"></p>
+    </body>
+</html>

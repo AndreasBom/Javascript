@@ -1,0 +1,107 @@
+<!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+
+
+        <script>
+            //Namespace
+            var $J = {};
+
+            //Vara start
+            $J.Vara = function (namn, pris, beskrivning, antal) {
+                this.namn = namn;
+                this.pris = pris;
+                this.beskrivning = beskrivning;
+                this.antal = antal;
+
+                //Funktion som tillhör klassen
+                this.calcSubTotal = function () {
+                    var summa = this.pris * this.antal;
+                    return summa;
+                };
+            };
+            //Vara slut
+
+            //Kundkorg start
+            $J.Kundkorg = function () {
+                //Variabler som tillhör klassen
+                this.vara = [];
+                this.index = 0;
+
+                //Funktion som tillhör klassen
+                this.addVara = function (vara) {
+                    this.vara[this.index] = vara;
+                    this.index++;
+                };
+
+                var summa = 0; //Måste ligga utanför forloopen, annars nollställs den varje gång loopen körs.
+                var antal = 0;
+                this.calcTotal = function () {
+
+                    for(var i=0; i<this.vara.length; i++){
+                        summa += this.vara[i].pris * this.vara[i].antal;
+
+                    }
+                    return summa;
+                };
+            };
+            //Kundkorg slut
+
+            var korg = new $J.Kundkorg();
+
+            function resultat() {
+
+                var namn = document.getElementById("namn").value;
+                var pris = parseInt(document.getElementById("pris").value);
+                var beskrivning = document.getElementById("beskrivning").value;
+                var antal = parseInt(document.getElementById("antal").value);
+
+                var produkt = new $J.Vara(namn, pris, beskrivning, antal);
+                //Ny vara skall läggas till arra
+                korg.addVara(produkt);
+
+                var summa = produkt.calcSubTotal();
+                // Hela korgens summa
+                var total = korg.calcTotal();
+
+                document.getElementById("allavaror").innerHTML += "<b>Vara:</b> " +namn + " | " + "<b>Pris/st:</b> " + pris +
+                "kr | <b>Beskrivning:</b> " + beskrivning + " | " + "<b>Antal:</b> " + antal + " | " + "<b>Summa:</b> " + summa + "kr <br />";
+                document.getElementById("totalpris").innerHTML = "<b>Totaltpris:</b> " +total+ "kr";
+
+            }
+
+            //Test-funktion som körs i konsollen
+            var test = function () {
+                //Nytt objekt
+                var mjölk = new $J.Vara("Mjölk", 16, "Röd Mjölk", 3);
+                var ost = new $J.Vara("Ost", 79, "Greve", 2);
+                console.log(mjölk); //Scriver ut hela objektet
+                console.log(ost);
+
+
+
+                //Räknar ut subtotalt
+                var subTotalMjölk = mjölk.calcSubTotal();
+                var subTotalOst = ost.calcSubTotal();
+                console.log("Mjölk " + subTotalMjölk);//Skriver ut subtotalbeloppen
+                console.log("Ost " + subTotalOst);
+
+                //Nytt objekt
+                var kundvagn = new $J.Kundkorg();
+                kundvagn.addVara(mjölk);
+                kundvagn.addVara(ost);
+                console.log(kundvagn); //Visar objektet kundvagn.
+
+                //Skriver ut calctoTotal
+                console.log(kundvagn.calcTotal());
+
+                return "Det funkar!" //Skrivs ut sist om hela funktionen fungerar
+            };
+
+        </script>
+    </body>
+</html>

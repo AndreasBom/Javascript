@@ -1,0 +1,34 @@
+<!-- Andreas Bom -->
+
+<!-- 20. Gör en sida som har ett div-element som det står God Jul i med absolut positionering. Sätt en timer som kallar på en funktion som flyttar elementet 1 pixel åt höger 20 ggr per sekund. -->
+
+<!DOCTYPE html>
+    <html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 20</title>
+
+        <script>
+
+            //funktionen väntar till hela sidan har laddats in, innan setInterval körs
+            window.onload = setInterval(moveDiv, 50);
+
+
+            function moveDiv() {
+                //lagrar style.left till en variabel
+                var divToMove = document.getElementById("text").style.left;
+
+                //parseInt för att ta bort "px" och göra om värdet till en integer
+                divToMove = parseInt(divToMove);
+                //Ökar värdet med 1
+                divToMove += 1;
+                //Ger tillbaka nya värdet till style.left
+                document.getElementById("text").style.left = divToMove + "px";
+
+            }
+        </script>
+    </head>
+    <body>
+        <div id="text" style="position: absolute; left: 1px"><h1>God Jul</h1></div>
+    </body>
+</html>

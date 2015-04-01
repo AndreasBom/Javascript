@@ -1,0 +1,77 @@
+<!-- Andreas Bom -->
+
+<!-- 22. Gör ett program som  placerar ut 5 st div-element 50*50 pixlar på slumpade positioner. När användaren drar musen över dem skall de slumpas ut på en ny position. -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 22</title>
+
+        <script>
+             //Variabler som behöver ha "minne", dvs ska inte nollställas när en funktion startar
+             var count = 0;
+             var idCount = 0;
+
+            // Körs efter att sidan har laddats in
+            window.onload = function() {
+                //Skapar 5 div'ar efter att sidan har laddats in
+                while(count<5) {
+                    addDivToBody(50,50,1000,600);
+                    count += 1;
+                }
+
+                //Eventlistneres. placeDiv körs vid mouseover
+                document.getElementById("div1").addEventListener('mouseover', function() {placeDiv(1000,600,1);});
+                document.getElementById("div2").addEventListener('mouseover', function() {placeDiv(1000,600,2);});
+                document.getElementById("div3").addEventListener('mouseover', function() {placeDiv(1000,600,3);});
+                document.getElementById("div4").addEventListener('mouseover', function() {placeDiv(1000,600,4);});
+                document.getElementById("div5").addEventListener('mouseover', function() {placeDiv(1000,600,5);});
+            };
+
+
+            //Funktion som skapar blåa div's.
+                // INDATA Bredd och höjd på div'en + bredd och höjd på ytan där div'arna tillåts att placeras
+            function addDivToBody (width, height, screenW, screenH) {
+                 idCount += 1;
+                //Skapar ny div
+                var divTagg = document.createElement("div");
+                divTagg.id = "div" + idCount;
+                divTagg.style.width = width + "px";
+                divTagg.style.height = height + "px";
+                divTagg.style.backgroundColor = "lightBlue";
+                divTagg.style.position = "absolute";
+
+                //Div-elementet läggs ut i dokumentets vä-översta hörn för att placeDiv ska hitta div-elementet
+                document.body.appendChild(divTagg);
+
+                //Div elementets position randomiseras
+                placeDiv(screenW,screenH, idCount);
+
+            }
+
+
+
+
+            //Funktion som placerar ut div's slumpmässigt i dokumentet.
+                //INDATA: Bredd och höjd på ytan där div'arna tillåts att placeras, idNum är löpnummret på div'arnas id
+            function placeDiv (screenWidth, screenHeight,idNum) {
+
+                var divPos = document.getElementById("div" + idNum);
+                var posY = Math.floor(Math.random()*((screenHeight-0)+1)+0); // ((y-x)+1)+x)
+                var posX = Math.floor(Math.random()*((screenWidth-0)+1)+0); // ((y-x)+1)+x)
+                divPos.style.position = "absolute";
+                divPos.style.top = posY + "px";
+                divPos.style.left = posX + "px";
+
+            }
+
+
+
+        </script>
+    </head>
+    <body>
+
+
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!-- Gör ett program som frågar användaren efter ett antal dagar och svarar med antal år, månader och dagar. För enkelhets skull kan du anta att alla månader har 30 dagar. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 22</title>
+        <style>
+            #daysText {
+                width: 60px;
+            }
+        </style>
+        
+        <script>
+            function funcConvert() {
+                //Variabler
+                var daysInput = document.getElementById("daysText").value; //Input från användaren
+                var days;
+                var months;
+                var years;
+                
+                //Ett år räknas som 360 dagar, då 30 dagar i en månad * 12 månader = 360.  
+                years = parseInt(daysInput / 360); //delar input med antaldagar på ett år och tillåter endast svaret i heltal
+                months = parseInt((daysInput - (years * 360)) / 30 ); //drar bort antal år och delar därefter med antal dagar som finns i en månad. Svaret rundas av till heltal
+                days = parseInt(((daysInput - (years * 360) - (months * 30)) % 30) ); //Drar bort antal år och månader från input, och tar därefter modulären av antal dagar i en månad (30). 
+                                
+                //Output
+                document.getElementById("years").innerHTML = years;
+                document.getElementById("months").innerHTML = months;
+                document.getElementById("days").innerHTML = days;
+            }
+            
+        
+        </script>
+        
+    </head>
+    <body>
+        
+        <h1>Mata in antal dagar</h1>
+        <input type="text" id="daysText" />
+        <input type="button" id="btn" value="Omvandla" onClick="funcConvert();" />
+        <p><span id="years"></span> år <span id="months"></span> månader <span id="days"></span> dagar</p>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!-- Andreas Bom -->
+
+<!-- 21. Gör ett program som  placerar ut 1 st div-element 50*50 pixlar per sekund på en slumpad position. -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 21</title>
+        <script>
+
+            var firstTime = true;
+            setInterval(function(){
+                if (firstTime) {
+                    addDivToBody(50, 50, 1000, 600);
+                    firstTime = false; //functionen addDivToBody kommer endast köras en gång
+                }else {
+                    placeDiv(1000, 600);
+                }
+            }, 1000);
+
+            //Funktion som skapar blåa div's
+            function addDivToBody (width, height, screenW, screenH) {
+                //Skapar ny div
+                var divTagg = document.createElement("div");
+                divTagg.style.width = width + "px";
+                divTagg.style.height = height + "px";
+                divTagg.style.backgroundColor = "lightBlue";
+                divTagg.style.position = "absolute";
+
+                //Div-elementet läggs ut i dokumentets vä-översta hörn för att placeDiv ska hitta div-elementet
+                document.body.appendChild(divTagg);
+
+                //Div elementets position randomiseras
+                placeDiv(screenW,screenH);
+
+             }
+
+
+            function placeDiv (screenWidth, screenHeight) {
+                //Position
+                var divPos = document.getElementsByTagName("div"); //Samlar alla div i en NodeList
+                var posY = Math.floor(Math.random()*((screenHeight-0)+1)+0); // ((y-x)+1)+x)
+                var posX = Math.floor(Math.random()*((screenWidth-0)+1)+0); // ((y-x)+1)+x)
+                divPos[0].style.position = "absolute"; //Första (enda i detta fallet) elementet i NodeListen (divPos[0])
+                divPos[0].style.top = posY + "px";
+                divPos[0].style.left = posX + "px";
+
+            }
+
+        </script>
+
+    </head>
+    <body>
+
+    </body>
+</html>

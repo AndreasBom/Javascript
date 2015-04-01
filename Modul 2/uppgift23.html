@@ -1,0 +1,56 @@
+<!-- Andreas Bom -->
+
+<!-- 23. Gör ett div-element 50*200 pixlar som rör sig fram och tillbaka på skärmen med texten God jul den skall röra sig en pixel åt höger i ett visst intervall. när elementet flyttat sig 200 pixlar skall det byta till motsatt riktning.  -->
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Uppgift 23</title>
+
+        <script>
+
+            //Väntar tills att sidan har laddats innan funktionen moving börjar köras
+            window.onload = setInterval(moving, 20);
+
+            //Variabel som bestämmer åt vilket håll texten rör sig.
+            var goRight = true;
+
+            //Funktion som ändrar position på en div
+            function moving() {
+
+                var div = document.getElementById("movingDiv").style.left;
+                div = parseInt(div); //Gör om till ett heltal
+
+
+                //Om style.left är mindre än 200 och goRigt är sant
+                if(div < 200 && goRight == true ){
+                    div += 1;
+                    document.getElementById("movingDiv").style.left = div + "px";
+
+                    //När style.left når 200 ska riktningen bytas, goRight blir falskt
+                    if(div == 200) {
+                        goRight = false
+                    }
+
+                //Om style.left är mer än 0 och goRight är falskt
+                }else if(div > 0 && goRight == false) {
+
+                    div -= 1;
+                    document.getElementById("movingDiv").style.left = div + "px";
+
+                    //När style.left når 0, byts riktning
+                    if(div == 0) {
+                        goRight = true;
+                    }
+
+                }
+            }
+
+        </script>
+
+    </head>
+    <body>
+        <div id="movingDiv" style="width: 200px; height: 50px; font-size: xx-large; text-align: center; position:absolute; left: 0;">God Jul</div>
+    </body>
+</html>

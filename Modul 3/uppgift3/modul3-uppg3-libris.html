@@ -1,0 +1,93 @@
+<!-- Andreas Bom -->
+
+
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Librissökning</title>
+
+	<style>
+		table td {
+			margin: 2px;
+			padding: 2px;
+		}
+
+		.spacing > td
+		{
+			padding-bottom: 30px;
+		}
+
+	</style>
+
+
+</head>
+<body>
+	<h1 id="rubrik">Librissökning</h1>
+	
+	<p>Ange sökord:</p>
+	<input type="text" id="query">
+	<input type="button" onclick="doSearch(query.value)" value="Sök Libris">
+
+	<h2 style="margin-bottom: 1px; padding-bottom: 1px;">Sökresultat</h2>
+	<div id="result">
+		<h3 id="hits" style="margin-top: 1px; padding: 1px;"></h3>
+		<table id="result_table"></table>
+
+	</div>
+	<script>
+		// Skicka en sökning efter "query" till libris.kb.se
+		function doSearch(query) {
+			console.log("Startar sökning efter: " + query);
+
+			// Begär JSON format med callback, dvs JSONP-format. Lägg till query-strängen sist.
+			// encodeURI gör att speciella bokstäver som mellanslag översätts till URI-godkända tecken
+			// När laddningen är klar kommer vår callback anropas: finishedLoading()
+			var search_url = "http://libris.kb.se/xsearch?format=json&callback=finishedLoading&n=20&query=" + encodeURI(query);
+
+			// Fulhack: script tag injection. Webbläsaren tror att det är javascript-kod som ska hämtas och laddas
+			// Men egentligen är det JSON-data
+			var scrpt = document.createElement("script");
+			document.body.appendChild(scrpt);
+			scrpt.src = search_url;
+		}
+
+		// Denna funktion anropas när resultatet av sökningen har hämtats klart. Argumentet kommer att bli
+		// JSON-datan i form av ett vanligt javascript-objekt.
+		function finishedLoading(result_json) {
+
+			//Strängvariabel som ska skrivas ut till dokumentet
+			var htmlOut = "";
+
+			//Skriver ut antal sökträffar
+			document.getElementById("hits").innerHTML =  "Antal träffar: " + result_json.xsearch.records;
+
+			//Loopar igenom resultatet av json-resultatet
+			for (var i = 0;i < result_json.xsearch.list.length; i++) {
+
+				//Variabler som underlättar injection av HTML
+				var trtd = "<tr><td>";
+				var trtdE = "</td></tr>";
+				var td = "<td>";
+				var tdE = "</td>";
+
+				//Titel "title"
+				htmlOut += trtd + "Titel: " + td + result_json.xsearch.list[i].title + tdE + trtdE;
+
+				//Författare "creator"
+				htmlOut += trtd + "Författare: " + td + result_json.xsearch.list[i].creator + trtdE;
+
+				//ISBN "isbn"
+				htmlOut += trtd + "ISBN: " + td + result_json.xsearch.list[i].isbn + trtdE;
+
+				//Datum "date"
+				htmlOut += "<tr class='spacing'> <td>" + "År: " + td + result_json.xsearch.list[i].date + trtdE;
+
+
+				document.getElementById("result_table").innerHTML = htmlOut;
+			}
+
+		}
+	</script>
+
+
+</body>

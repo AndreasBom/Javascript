@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <title>Uppgift 10</title>
+    </head>
+    <body>
+    
+        <script>
+            /* Gör ett program som slumpar ut 5 decimaltal mellen 0 och 1 i en loop för varige slumpat tal skall texten:
+
+                "Det var ett litet tal" skrivas ut om talet är mindre än 0,5
+
+                "Det var ett stort tal" skrivas ut om talet är större än eller lika med 0,5 */
+            
+            var i = 0;
+            while (i < 4) {
+                var rand = Math.random();
+                
+                if (rand < 0.5) {
+                    document.write("Det var ett litet tal (" + rand + ")");
+                } else if (rand >= 0.5){
+                    document.write("Det var ett stort tal (" + rand + ")");
+                }
+                document.write("<br />");
+                i += 1;
+            }
+        
+        </script>
+
+    </body>
+</html>
